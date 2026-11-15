@@ -75,3 +75,4 @@ void *student_thread(void *arg) {
 }
 
 /* Mutex validation */
+/* Retry delay */
