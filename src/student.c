@@ -73,3 +73,5 @@ void *student_thread(void *arg) {
     log_event("[Student %d] Finished all programming assignments! Exiting.", s->id);
     return NULL;
 }
+
+/* Mutex validation */
