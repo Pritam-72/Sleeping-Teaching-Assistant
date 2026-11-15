@@ -1,0 +1,12 @@
+# Binaries
+ta
+ta_tsan
+ta_asan
+
+# Object files
+*.o
+src/*.o
+
+# Temporary files
+*.tmp
+*.log
