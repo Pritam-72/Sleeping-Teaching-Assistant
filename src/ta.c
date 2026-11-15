@@ -61,3 +61,5 @@ void *ta_thread(void *arg) {
     log_event("[TA] Office hours ended. TA leaving office. Goodbye!");
     return NULL;
 }
+
+/* Admission signal */
