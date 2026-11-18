@@ -23,7 +23,7 @@ In the root directory of the project, run:
 ```bash
 make
 ```
-This produces the executable `./ta`.
+This produces the executable `./ta`. The same command works on Linux and macOS. On macOS the semaphores are named, because unnamed `sem_init` is not implemented there.
 
 ### 2. Execute the Simulation
 
@@ -58,6 +58,9 @@ This produces the executable `./ta`.
 | `-s` | `<num>` | `5` | Total number of student threads to create |
 | `-c` | `<num>` | `3` | Total number of hallway chairs available |
 | `-n` | `<num>` | `3` | Number of times each student must be helped before completing |
+| `-p` | `<ms>` or `<min:max>` | `200:600` | Programming delay before each office visit. `0` makes students arrive together |
+| `-t` | `<ms>` or `<min:max>` | `150:400` | How long the TA helps one student |
+| `-r` | `<ms>` or `<min:max>` | `300:700` | Delay before a turned-away student retries |
 | `-h` | — | — | Print usage help message |
 
 ---
@@ -90,42 +93,34 @@ make clean
 ## 🔄 Synchronization Architecture
 
 ### Shared State & Primitives
-- **`pthread_mutex_t chair_mutex`**: Protects access to the shared counter `waiting_students` and the `ta_sleeping` status flag. Mutex locks are held only for short critical sections and **never** while blocking on semaphores.
-- **`sem_t students_sem` (init: 0)**: Counting semaphore representing students waiting in chairs. The TA thread blocks here to sleep when no students are present.
-- **`sem_t ta_sem` (init: 0)**: Permission semaphore posted by the TA to admit one waiting student from the hallway into the office.
-- **`sem_t done_sem` (init: 0)**: Coordination semaphore posted by the TA when the help session finishes, ensuring the student does not leave prematurely.
+- **`pthread_mutex_t chair_mutex`**: Protects `waiting_students`, the hallway queue, and `ta_sleeping`. It is never held while blocking on a semaphore, and never held across logging.
+- **`students_sem` (init: 0)**: Counting semaphore. A student posts once for each chair taken. The TA blocks here when the hallway is empty, so a wakeup cannot be lost.
+- **Per-student `admit`, `done`, and `left` semaphores**: The hallway is a FIFO queue. The TA admits the student at the head, helps that student, then waits until that same student has taken the completion signal and left. A later student cannot consume someone else's help.
+- On macOS these are named semaphores (`sem_open`). Unnamed `sem_init` is not implemented there. On Linux they are unnamed.
 
 ### Sequence Flow
 
 ```mermaid
 sequenceDiagram
-    participant S1 as Student 1 (Arriving)
-    participant S2 as Student 2 (Arriving)
+    participant S1 as Student 1
+    participant S2 as Student 2
     participant M as chair_mutex
     participant SS as students_sem
-    participant TS as ta_sem
-    participant DS as done_sem
     participant TA as TA Thread
 
-    Note over TA: TA blocks on sem_wait(students_sem) [Napping]
-    S1->>M: lock, waiting++, unlock
-    S1->>SS: sem_post (wakes TA)
-    S1->>TS: sem_wait (waits in chair)
-    SS-->>TA: TA unblocks
-    TA->>M: lock, waiting--, unlock
-    TA->>TS: sem_post (admits S1)
-    TS-->>S1: S1 enters office
-    Note over TA,S1: TA helping Student 1
-    S2->>M: lock, waiting++, unlock
-    S2->>SS: sem_post
-    S2->>TS: sem_wait (sits in hallway chair)
-    Note over TA,S1: Help session finishes
-    TA->>DS: sem_post
-    DS-->>S1: S1 leaves office and returns to lab
-    TA->>SS: sem_wait (returns immediately, S2 is waiting)
-    TA->>M: lock, waiting--, unlock
-    TA->>TS: sem_post (admits S2)
-    TS-->>S2: S2 enters office
+    Note over TA: TA blocks on students_sem while the hallway is empty
+    S1->>M: lock, enqueue, unlock
+    S1->>SS: post
+    S1->>S1: wait on own admit semaphore
+    SS-->>TA: TA unblocks, dequeues S1
+    TA->>S1: post S1 admit
+    Note over TA,S1: TA helps S1, then posts S1 done
+    S2->>M: lock, enqueue, unlock
+    S2->>SS: post
+    S2->>S2: wait on own admit semaphore
+    S1->>TA: post S1 left after receiving done
+    TA->>SS: wait, then dequeue S2
+    TA->>S2: post S2 admit
 ```
 
 ---
@@ -153,42 +148,28 @@ OS Project/
 ## 🖥️ Sample Execution Output
 
 ```text
-$ ./ta -s 4 -c 3 -n 1
+$ ./ta -s 1 -c 3 -n 1 -p 50 -t 20
 
-[  0.000s] =================================================
-[  0.000s]        THE SLEEPING TEACHING ASSISTANT          
-[  0.000s] =================================================
-[  0.000s] Configuration:
-[  0.000s]   - Total Students:         4
-[  0.000s]   - Hallway Chairs:         3
-[  0.000s]   - Helps Required/Student: 1
-[  0.000s] =================================================
-[  0.000s] [TA] Teaching Assistant arrived at office and opened office hours.
-[  0.000s] [TA] No students waiting. TA sits at desk and takes a nap (Zzz...).
-[  0.001s] [Student 1] Started programming assignments (needs help 1 times).
-[  0.001s] [Student 2] Started programming assignments (needs help 1 times).
-[  0.001s] [Student 3] Started programming assignments (needs help 1 times).
-[  0.001s] [Student 4] Started programming assignments (needs help 1 times).
-[  0.228s] [Student 3] Encountered a bug! Heading to TA's office for help.
-[  0.228s] [Student 3] Found TA sleeping! Student awakens TA (hallway chairs occupied: 1/3).
-[  0.228s] [TA] Calling next student into office (hallway chairs occupied: 0/3).
-[  0.228s] [TA] Helping student with programming assignment (245 ms)...
-[  0.228s] [Student 3] Entering office and getting help from TA.
-[  0.249s] [Student 2] Encountered a bug! Heading to TA's office for help.
-[  0.249s] [Student 2] TA is currently helping another student. Student sits on a chair in the hallway (chairs occupied: 1/3).
-[  0.343s] [Student 1] Encountered a bug! Heading to TA's office for help.
-[  0.343s] [Student 1] TA is currently helping another student. Student sits on a chair in the hallway (chairs occupied: 2/3).
-[  0.473s] [TA] Finished helping student.
-[  0.473s] [TA] Calling next student into office (hallway chairs occupied: 1/3).
-[  0.473s] [Student 3] Finished receiving help from TA (0/1 helps remaining). Returning to lab.
-[  0.473s] [Student 3] Finished all programming assignments! Exiting.
-[  0.473s] [Student 2] Entering office and getting help from TA.
-...
-[  1.250s] [TA] No students waiting. TA sits at desk and takes a nap (Zzz...).
-[  1.251s] =================================================
-[  1.251s] All students have completed their assignments!
-[  1.251s] Notifying TA to wrap up office hours...
-[  1.251s] =================================================
-[  1.251s] [TA] Office hours ended. TA leaving office. Goodbye!
-[  1.251s] Simulation completed successfully. Clean shutdown.
+[  0.000s] [tid 0x1f5dde180] =================================================
+[  0.000s] [tid 0x1f5dde180]        THE SLEEPING TEACHING ASSISTANT
+[  0.000s] [tid 0x1f5dde180] =================================================
+[  0.000s] [tid 0x1f5dde180] Configuration:
+[  0.000s] [tid 0x1f5dde180]   - Total Students:         1
+[  0.000s] [tid 0x1f5dde180]   - Hallway Chairs:         3
+[  0.000s] [tid 0x1f5dde180]   - Helps Required/Student: 1
+[  0.000s] [tid 0x1f5dde180]   - Programming delay:      50-50 ms
+[  0.000s] [tid 0x1f5dde180]   - Help duration:          20-20 ms
+[  0.000s] [tid 0x1f5dde180] =================================================
+[  0.000s] [tid 0x16bd8f000] [TA] Teaching Assistant arrived at office and opened office hours.
+[  0.000s] [tid 0x16bd8f000] [TA] No students waiting. TA is sleeping (Zzz...).
+[  0.000s] [tid 0x16be1b000] [Student 1] Started programming assignments (needs help 1 times).
+[  0.093s] [tid 0x16be1b000] [Student 1] Found TA sleeping! Student awakens TA (hallway chairs occupied: 1/3).
+[  0.093s] [tid 0x16bd8f000] [TA] Calling student 1 into office (hallway chairs occupied: 0/3).
+[  0.093s] [tid 0x16bd8f000] [TA] Helping student 1 with programming assignment (20 ms)...
+[  0.093s] [tid 0x16be1b000] [Student 1] Entering office and getting help from TA.
+[  0.165s] [tid 0x16bd8f000] [TA] Finished helping student 1.
+[  0.165s] [tid 0x16be1b000] [Student 1] Finished receiving help from TA (0/1 helps remaining). Returning to lab.
+[  0.165s] [tid 0x16be1b000] [Student 1] Finished all programming assignments! Exiting.
+[  0.165s] [tid 0x16bd8f000] [TA] Office hours ended. TA leaving office. Goodbye!
+[  0.165s] [tid 0x1f5dde180] Simulation completed successfully. Clean shutdown.
 ```

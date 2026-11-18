@@ -22,9 +22,19 @@ asan: $(SRC)
 	$(CC) $(ASAN_FLAGS) -o $(TARGET_ASAN) $(SRC)
 
 clean:
-	rm -f $(TARGET) $(TARGET_TSAN) $(TARGET_ASAN) src/*.o
+	rm -f $(TARGET) $(TARGET_TSAN) $(TARGET_ASAN) src/*.o test-one.log test-full.log test-stress.log
 
 test: $(TARGET)
-	@echo "Running quick 3-student test..."
-	./$(TARGET) -s 3 -c 3 -n 2
+	./$(TARGET) -s 1 -c 3 -n 1 -p 50 -t 20 > test-one.log
+	grep -q "TA is sleeping" test-one.log
+	grep -q "awakens TA" test-one.log
+	grep -q "Clean shutdown" test-one.log
+	./$(TARGET) -s 5 -c 3 -n 1 -p 0 -t 250 > test-full.log
+	grep -q "chairs are full" test-full.log
+	./$(TARGET) -s 8 -c 2 -n 2 -p 0 -t 0 > test-stress.log
+	@test $$(grep -c "Finished helping student" test-stress.log) -eq 16
+	@test $$(grep -c "Finished all programming" test-stress.log) -eq 8
+	grep -q "Clean shutdown" test-stress.log
+	rm -f test-one.log test-full.log test-stress.log
+	@echo "tests passed"
 

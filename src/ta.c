@@ -3,10 +3,9 @@
 #include "shared.h"
 #include "util.h"
 
-#include <stdio.h>
+#include <assert.h>
 #include <stdlib.h>
 #include <time.h>
-#include <assert.h>
 
 void *ta_thread(void *arg) {
     (void)arg;
@@ -15,47 +14,58 @@ void *ta_thread(void *arg) {
     log_event("[TA] Teaching Assistant arrived at office and opened office hours.");
 
     while (1) {
-        /* Check if any students are waiting; if none, announce sleeping */
+        int nap = 0;
+
         pthread_mutex_lock(&chair_mutex);
         if (waiting_students == 0 && running) {
             ta_sleeping = 1;
-            log_event("[TA] No students waiting. TA sits at desk and takes a nap (Zzz...).");
+            nap = 1;
         }
         pthread_mutex_unlock(&chair_mutex);
 
-        /* Wait to be awakened by an arriving student or shutdown signal */
-        sem_wait(&students_sem);
+        if (nap) {
+            log_event("[TA] No students waiting. TA is sleeping (Zzz...).");
+        }
 
-        /* Check for shutdown condition */
+        /* Blocks when the hallway is empty. A post that already happened is not lost. */
+        semx_wait(&students_sem);
+
         pthread_mutex_lock(&chair_mutex);
         if (!running && waiting_students == 0) {
             pthread_mutex_unlock(&chair_mutex);
             break;
         }
+        if (waiting_students == 0) {
+            pthread_mutex_unlock(&chair_mutex);
+            continue;
+        }
 
-        /* TA is now awake and helping */
         ta_sleeping = 0;
-
-        /* Decrement waiting students on hallway chairs */
+        int sid = wait_queue[q_head];
+        q_head = (q_head + 1) % num_chairs;
         waiting_students--;
         assert(waiting_students >= 0 && waiting_students <= num_chairs);
+        assert(sid >= 1);
         int remaining = waiting_students;
         pthread_mutex_unlock(&chair_mutex);
 
-        log_event("[TA] Calling next student into office (hallway chairs occupied: %d/%d).",
-                  remaining, num_chairs);
+        log_event("[TA] Calling student %d into office (hallway chairs occupied: %d/%d).",
+                  sid, remaining, num_chairs);
 
-        /* Admit waiting student into office */
-        sem_post(&ta_sem);
+        semx_post(&admit_sems[sid]);
 
-        /* Simulate helping the student */
-        int help_ms = 150 + (rand_r(&ta_seed) % 250);
-        log_event("[TA] Helping student with programming assignment (%d ms)...", help_ms);
+        int help_ms = help_min;
+        if (help_max > help_min) {
+            help_ms += (int)(rand_r(&ta_seed) % (unsigned)(help_max - help_min + 1));
+        }
+        log_event("[TA] Helping student %d with programming assignment (%d ms)...", sid, help_ms);
         random_sleep_ms(help_ms, help_ms, &ta_seed);
-        log_event("[TA] Finished helping student.");
+        log_event("[TA] Finished helping student %d.", sid);
 
-        /* Signal student that help session is completed */
-        sem_post(&done_sem);
+        /* done_sems[sid] belongs to this student. The next student is not
+         * admitted until this one has taken the completion and left. */
+        semx_post(&done_sems[sid]);
+        semx_wait(&left_sems[sid]);
     }
 
     log_event("[TA] Office hours ended. TA leaving office. Goodbye!");
