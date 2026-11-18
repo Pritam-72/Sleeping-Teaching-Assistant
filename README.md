@@ -65,7 +65,7 @@ This produces the executable `./ta`. The same command works on Linux and macOS. 
 
 ---
 
-## 🛠️ Build Targets & Verification
+## 🛠️ Build Targets and Verification
 
 The included `Makefile` provides several build targets for debugging and concurrency verification:
 
