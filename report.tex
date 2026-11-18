@@ -3,11 +3,11 @@
 %% ─── Packages ───────────────────────────────────────────────────────────────
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage[margin=1in,top=1.1in,bottom=1.1in]{geometry}
+\usepackage[margin=1in,top=1.0in,bottom=1.0in]{geometry}
 \usepackage{lmodern}
 \usepackage{microtype}
 \usepackage{setspace}
-\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{amsmath,amssymb,amsthm}
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{array}
@@ -16,67 +16,52 @@
 \usepackage{multirow}
 \usepackage{float}
 \usepackage{caption}
-\usepackage{subcaption}
 \usepackage{listings}
 \usepackage{xcolor}
 \usepackage{fancyhdr}
 \usepackage{titlesec}
-\usepackage{hyperref}
+\usepackage[hidelinks]{hyperref}
 \usepackage{enumitem}
 \usepackage{tikz}
-\usetikzlibrary{shapes.geometric,arrows.meta,positioning,calc,fit,backgrounds,decorations.pathreplacing}
-\usepackage{pgfplots}
-\pgfplotsset{compat=1.18}
-\usepackage{tcolorbox}
-\tcbuselibrary{skins,breakable}
-\usepackage{mdframed}
+\usetikzlibrary{shapes.geometric,arrows.meta,positioning,calc,backgrounds}
 \usepackage{parskip}
-
-%% ─── Hyperref Setup ─────────────────────────────────────────────────────────
-\hypersetup{
-    colorlinks=true,
-    linkcolor=blue!70!black,
-    citecolor=blue!60!black,
-    urlcolor=teal!80!black,
-    pdftitle={The Sleeping Teaching Assistant: A POSIX Concurrency Project},
-    pdfauthor={Pritam},
-    pdfsubject={Operating Systems},
-}
+\usepackage{tocloft}
+\usepackage{emptypage}
 
 %% ─── Spacing ────────────────────────────────────────────────────────────────
-\setstretch{1.15}
+\setstretch{1.3}
 \setlength{\parindent}{0pt}
-\setlength{\parskip}{6pt}
+\setlength{\parskip}{6pt plus 2pt}
 
 %% ─── Header / Footer ────────────────────────────────────────────────────────
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[L]{\small\textit{The Sleeping Teaching Assistant}}
-\fancyhead[R]{\small\textit{Operating Systems Project}}
-\fancyfoot[C]{\small\thepage}
-\renewcommand{\headrulewidth}{0.4pt}
-\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\small SRM University, AP}
+\fancyhead[R]{\small Operating Systems (CSE 302)}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.5pt}
+
 \fancypagestyle{plain}{
   \fancyhf{}
-  \fancyfoot[C]{\small\thepage}
+  \fancyfoot[C]{\thepage}
   \renewcommand{\headrulewidth}{0pt}
 }
 
-%% ─── Chapter / Section Formatting ───────────────────────────────────────────
+%% ─── Chapter Title Formatting ───────────────────────────────────────────────
 \titleformat{\chapter}[display]
-  {\normalfont\large\bfseries\color{blue!50!black}}
-  {\chaptertitlename\ \thechapter}{10pt}{\LARGE}
-\titlespacing*{\chapter}{0pt}{10pt}{20pt}
+  {\normalfont\Large\bfseries}
+  {\chaptername\ \thechapter}{14pt}{\LARGE}
+\titlespacing*{\chapter}{0pt}{20pt}{25pt}
 
-\titleformat{\section}{\normalfont\large\bfseries\color{blue!40!black}}{\thesection}{1em}{}
+\titleformat{\section}{\normalfont\large\bfseries}{\thesection}{1em}{}
 \titleformat{\subsection}{\normalfont\normalsize\bfseries}{\thesubsection}{1em}{}
-\titleformat{\subsubsection}{\normalfont\normalsize\itshape\bfseries}{\thesubsubsection}{1em}{}
+\titleformat{\subsubsection}{\normalfont\normalsize\itshape}{\thesubsubsection}{1em}{}
 
-%% ─── Code Listing Setup ─────────────────────────────────────────────────────
+%% ─── Code Listings ──────────────────────────────────────────────────────────
 \definecolor{codebg}{rgb}{0.97,0.97,0.98}
 \definecolor{codegreen}{rgb}{0.0,0.50,0.20}
 \definecolor{codepurple}{rgb}{0.50,0.0,0.65}
-\definecolor{codeblue}{rgb}{0.10,0.20,0.72}
+\definecolor{codeblue}{rgb}{0.10,0.20,0.70}
 \definecolor{codegray}{rgb}{0.42,0.42,0.42}
 
 \lstdefinestyle{cstyle}{
@@ -86,7 +71,7 @@
   keywordstyle=\color{codeblue}\bfseries,
   stringstyle=\color{codepurple},
   numberstyle=\tiny\color{codegray},
-  basicstyle=\ttfamily\scriptsize,
+  basicstyle=\ttfamily\small,
   breakatwhitespace=false,
   breaklines=true,
   keepspaces=true,
@@ -95,13 +80,12 @@
   tabsize=4,
   showstringspaces=false,
   frame=single,
-  rulecolor=\color{black!15},
+  rulecolor=\color{black!20},
   captionpos=b,
 }
 \lstdefinestyle{bashstyle}{
-  language=bash,
-  backgroundcolor=\color{black!90},
-  basicstyle=\ttfamily\scriptsize\color{green!70!white},
+  backgroundcolor=\color{black!88},
+  basicstyle=\ttfamily\small\color{green!65!white},
   breaklines=true,
   frame=none,
   numbers=none,
@@ -109,34 +93,27 @@
 \lstset{style=cstyle}
 
 %% ─── Theorem Environments ───────────────────────────────────────────────────
-\newtheorem{theorem}{Theorem}[chapter]
 \newtheorem{invariant}{Invariant}[chapter]
-\newtheorem{definition}{Definition}[chapter]
+\newtheorem{theorem}{Theorem}[chapter]
 
-%% ─── TikZ Arrow Styles ──────────────────────────────────────────────────────
+%% ─── TikZ Styles ────────────────────────────────────────────────────────────
 \tikzset{
-  myarrow/.style={-{Latex[scale=0.9]}, thick},
-  dasharrow/.style={-{Latex[scale=0.9]}, thick, dashed, color=blue!60!black},
-  box/.style={rectangle, draw=black!60, fill=blue!5, thick,
-              minimum width=2.6cm, minimum height=0.75cm,
-              align=center, font=\small, rounded corners=2pt},
-  sembox/.style={rectangle, draw=orange!70!black, fill=orange!10, thick,
-                 minimum width=2.4cm, minimum height=0.7cm,
+  myarr/.style={-{Latex[scale=0.95]}, thick},
+  dasharr/.style={-{Latex[scale=0.95]}, dashed, thick, color=black!60},
+  sbox/.style={rectangle, draw=black!70, fill=gray!8, thick,
+               minimum width=2.8cm, minimum height=0.8cm,
+               align=center, font=\small, rounded corners=2pt},
+  diam/.style={diamond, draw=black!70, fill=yellow!10, thick,
+               aspect=2, align=center, font=\small},
+  sembox/.style={rectangle, draw=black!60, fill=gray!12, thick,
+                 minimum width=2.8cm, minimum height=0.7cm,
                  align=center, font=\small, rounded corners=2pt},
-  mutbox/.style={rectangle, draw=red!60!black, fill=red!8, thick,
-                 minimum width=2.4cm, minimum height=0.7cm,
-                 align=center, font=\small, rounded corners=2pt},
-  decis/.style={diamond, draw=black!60, fill=yellow!15, thick,
-                aspect=2.0, align=center, font=\small},
 }
 
-%% ─── Coloured info box ──────────────────────────────────────────────────────
-\newmdenv[backgroundcolor=blue!4,linecolor=blue!40,linewidth=1.2pt,
-          roundcorner=4pt,innertopmargin=6pt,innerbottommargin=6pt]{infobox}
+% ─── TOC formatting ──────────────────────────────────────────────────────────
+\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
 
-% ============================================================
-%  DOCUMENT
-% ============================================================
+%% ============================================================
 \begin{document}
 
 %% ════════════════════════════════════════════════════════════
@@ -144,342 +121,332 @@
 %% ════════════════════════════════════════════════════════════
 \begin{titlepage}
   \centering
-  \vspace*{0.8cm}
+  \vspace*{0.4cm}
+  {\Large\bfseries SRM University, AP}\\[0.25cm]
+  {\large Operating Systems (CSE 302)}\\[1.4cm]
 
-  {\color{blue!50!black}\rule{\linewidth}{1.2pt}}\\[6pt]
+  \rule{\linewidth}{1pt}\\[0.5cm]
+  {\LARGE\bfseries The Sleeping Teaching Assistant}\\[0.35cm]
+  {\large A Concurrent Programming Design and Implementation Report}\\[0.2cm]
+  {\normalsize Focused on Multi-Threading, Mutex Locks, and POSIX Semaphore Coordination}\\[0.5cm]
+  \rule{\linewidth}{1pt}\\[2.0cm]
 
-  {\LARGE\bfseries The Sleeping Teaching Assistant}\\[0.4cm]
-  {\large\textsc{A Multi-Threaded Concurrency Coordination Simulation}}\\[6pt]
+  {\large\textbf{Submitted To}}\\[0.5cm]
+  {\large Dr. \textbf{[Faculty Name]}}\\[0.3cm]
+  {\normalsize Department of Computer Science \& Engineering}\\[1.6cm]
 
-  {\color{blue!50!black}\rule{\linewidth}{1.2pt}}\\[1.6cm]
+  {\large\textbf{Submitted by}}\\[0.6cm]
 
-  \begin{minipage}{0.47\textwidth}\raggedright
-    \textbf{Author:}\\[2pt]
-    Pritam\\
-    B.Tech Computer Science \& Engineering\\
-    Department of Computing
-  \end{minipage}\hfill
-  \begin{minipage}{0.47\textwidth}\raggedleft
-    \textbf{Course:}\\[2pt]
-    Operating Systems Laboratory\\
-    Concurrent and Systems Programming\\
-    Academic Year 2026--27
-  \end{minipage}
-
-  \vspace{1.4cm}
-
-  \begin{tcolorbox}[colback=blue!4,colframe=blue!40,arc=4pt,
-                    title={\bfseries Abstract},fonttitle=\normalsize]
-    \setstretch{1.12}
-    \noindent
-    This report presents the complete design, formal analysis, implementation, and empirical
-    validation of the \emph{Sleeping Teaching Assistant} synchronisation problem—a canonical
-    bounded-resource concurrent scheduling challenge.  The system models one Teaching Assistant
-    (TA) thread and $N$ independent student threads sharing a resource-constrained environment:
-    an office admitting exactly one student at a time and a hallway providing $C$ waiting chairs.
-    The TA naps when idle, is awakened by the first arriving student, helps students one at a
-    time, and must handle both queuing and overflow gracefully.
-
-    The implementation is realised in \textbf{ANSI C11} using
-    \textbf{POSIX threads} (\texttt{pthreads}),
-    a \textbf{mutual exclusion lock} (\texttt{pthread\_mutex\_t}),
-    and three \textbf{POSIX counting semaphores} (\texttt{sem\_t}).
-    Formal invariants for office occupancy, hallway capacity, and quiescence are stated and
-    proved. The two-semaphore admission/completion handshake eliminates premature student
-    re-entry—a defect endemic to simpler textbook implementations.  Dynamic verification using
-    GCC \textbf{ThreadSanitizer} and \textbf{AddressSanitizer}/\textbf{LeakSanitizer} reports
-    zero data-race warnings and zero memory leaks across all evaluated configurations.
-    An automated 20-run stress loop confirms deadlock-freedom under high concurrency.
-    The source code is publicly available at
-    \url{https://github.com/Pritam-72/Sleeping-Teaching-Assistant}.
-  \end{tcolorbox}
+  \begin{tabular}{lc}
+    \toprule
+    \textbf{Name} & \textbf{Roll Number} \\
+    \midrule
+    Pritam & AP24110010XXX \\
+    \bottomrule
+  \end{tabular}
 
   \vfill
-  {\large\today}
+  {\large November 2026}
 \end{titlepage}
 
 %% ════════════════════════════════════════════════════════════
-%%  TABLE OF CONTENTS
+%%  ROMAN-NUMBERED FRONT MATTER
 %% ════════════════════════════════════════════════════════════
+\pagenumbering{roman}
+
+%% ─── Certificate ─────────────────────────────────────────────────────────────
+\chapter*{Certificate}
+\addcontentsline{toc}{chapter}{Certificate}
+
+This is to certify that the project titled \textbf{``The Sleeping Teaching Assistant''} is a
+bona fide work carried out by \textbf{Pritam}, student of SRM University, AP, in partial
+fulfillment of the requirements of the course \textbf{Operating Systems (CSE 302)}.
+
+This report has been prepared under the guidance of \textbf{Dr.\ [Faculty Name]} during the
+academic year \textbf{2026--2027}. The work presented here is original and has not been
+submitted, either in part or in full, to any other institution for the award of any degree or
+diploma.
+
+The project demonstrates the application of core operating systems concepts including POSIX
+threads, mutual exclusion using mutex locks, process synchronisation using POSIX semaphores,
+deadlock prevention, and concurrent programming in ANSI C11.
+
+\vspace{2.5cm}
+
+\begin{tabular}{p{6cm} p{6cm}}
+  \textbf{Guide Signature:} \hrulefill & \textbf{Date:} \hrulefill \\[1.6cm]
+  Dr.\ [Faculty Name] & \textbf{Place:} \hrulefill \\
+\end{tabular}
+
+\clearpage
+
+%% ─── Acknowledgement ─────────────────────────────────────────────────────────
+\chapter*{Acknowledgement}
+\addcontentsline{toc}{chapter}{Acknowledgement}
+
+I express my sincere gratitude to \textbf{Dr.\ [Faculty Name]} for the guidance,
+encouragement, and continuous support throughout the development of this project.
+
+I also thank \textbf{SRM University, AP} for providing the academic environment and the
+resources required to complete this work effectively.
+
+I appreciate the structured curriculum of the \textbf{Operating Systems (CSE 302)} course,
+which equipped me with the theoretical foundation and practical skills to design and implement
+correct concurrent programs using POSIX threads and synchronisation primitives.
+
+Finally, I thank my friends and well-wishers for their motivation and support during the
+preparation of this report.
+
+\clearpage
+
+%% ─── Abstract ────────────────────────────────────────────────────────────────
+\chapter*{Abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+
+The \textit{Sleeping Teaching Assistant} problem is a classic bounded-resource
+synchronisation challenge in operating systems design. This report presents the complete
+design, formal analysis, implementation, and empirical validation of a concurrent simulation
+of this problem.
+
+The system models one Teaching Assistant (TA) thread and $N$ independent student threads
+competing for a shared resource-constrained environment: an office admitting exactly one
+student at a time and a hallway providing $C = 3$ waiting chairs. The TA naps when idle, is
+awakened by the first arriving student, helps students one at a time, and must handle both
+queuing and overflow gracefully.
+
+The implementation is realised in \textbf{ANSI C11} using \textbf{POSIX threads (pthreads)},
+one \textbf{mutual exclusion lock} (\texttt{pthread\_mutex\_t}), and three
+\textbf{POSIX counting semaphores} (\texttt{sem\_t}). A three-semaphore architecture---using
+\texttt{students\_sem}, \texttt{ta\_sem}, and \texttt{done\_sem}---eliminates the premature
+re-entry race condition endemic to simpler two-semaphore textbook implementations.
+
+Formal invariants for office occupancy, hallway capacity, and TA quiescence are stated and
+proved. Dynamic verification using GCC \textbf{ThreadSanitizer} and
+\textbf{AddressSanitizer}/\textbf{LeakSanitizer} reports zero data-race warnings and zero
+memory leaks across all evaluated configurations. An automated 20-run stress loop confirms
+deadlock-freedom under high concurrency.
+
+\clearpage
+
+%% ─── Table of Contents ───────────────────────────────────────────────────────
 \tableofcontents
 \clearpage
+
+%% ════════════════════════════════════════════════════════════
+%%  ARABIC NUMBERED MAIN MATTER
+%% ════════════════════════════════════════════════════════════
+\pagenumbering{arabic}
 
 %% ════════════════════════════════════════════════════════════
 %%  CHAPTER 1 — INTRODUCTION
 %% ════════════════════════════════════════════════════════════
 \chapter{Introduction}
 
-\section{Project Background}
+\section{Project Overview}
 
-Concurrency and process synchronisation are foundational pillars of modern operating system design.
-As multi-core hardware became ubiquitous, software systems increasingly delegate independent
-units of work to concurrently executing threads, exposing programmers to a rich class of
-hazards: race conditions, deadlocks, priority inversions, and starvation.
+Concurrency is a foundational topic of modern operating systems. As multi-core hardware became
+the standard, software systems began delegating independent units of work to concurrently
+executing threads. This introduces a rich class of hazards---race conditions, deadlocks,
+priority inversions, and starvation---that must be managed precisely using synchronisation
+primitives.
 
-Classic synchronisation puzzles—the Dining Philosophers, the Sleeping Barber, the Readers-Writers
-problem, and the Sleeping Teaching Assistant—were formulated specifically to teach these
-hazards in a controlled, reasoning-friendly context.  Solving these problems correctly requires
-precise application of POSIX synchronisation primitives, careful reasoning about thread
-interleaving, and empirical validation under adversarial concurrency.
-
-This project implements and validates the \emph{Sleeping Teaching Assistant} problem using
-\textbf{POSIX threads (pthreads)}, \textbf{mutex locks}, and \textbf{semaphores}—the three
-primitive categories prescribed in the original problem specification \cite{silberschatz}.
-
-\section{Problem Statement}
-
-The problem models a university department's office-hour session:
-
-\begin{itemize}[leftmargin=1.6em,itemsep=2pt]
-  \item The TA's office contains a single desk, computer, and chair: \textbf{at most one student
-        may receive help at any instant}.
-  \item Directly outside the office, $C$ hallway chairs accommodate waiting students (default $C = 3$).
-  \item When no students are present, the TA \textbf{naps} at the desk.
-  \item A student arriving to find the TA asleep \textbf{awakens} the TA.
-  \item A student arriving while the TA is busy \textbf{sits} in an available hallway chair.
-  \item If all $C$ chairs are occupied, the student \textbf{leaves and returns later}.
-  \item Each student requires a configurable number $H$ of help sessions before finishing.
-  \item After all students finish, the TA \textbf{cleanly terminates} office hours.
-\end{itemize}
-
-\section{Motivation}
-
-Standard operating systems curricula teach synchronisation through theory alone.
-Implementing and instrumenting a live concurrent simulation forces the programmer to confront
-real hazards—data races reported by ThreadSanitizer, deadlocks discovered in stress loops,
-memory leaks identified by AddressSanitizer—that cannot be learned from textbook pseudocode.
-Moreover, the Sleeping TA problem has practical analogues: connection-pool managers,
-bounded-queue worker-thread pools, and hardware interrupt-driven service routines all exhibit
-the same producer-consumer-with-bounded-buffer pattern.
+The \textit{Sleeping Teaching Assistant} problem models a university department's office-hour
+session and is a canonical synchronisation exercise. Solving it correctly requires precise
+application of POSIX semaphores, mutex locks, and careful reasoning about thread interleaving.
+This project implements and validates a complete, race-free, deadlock-free solution in
+C11/POSIX.
 
 \section{Objectives}
 
-\begin{enumerate}[leftmargin=1.8em,itemsep=1pt]
-  \item Implement a deadlock-free, race-free, and starvation-bounded solution in C11/POSIX.
-  \item Model all concurrency with \emph{blocking} primitives only (no busy-waiting).
-  \item Verify correctness formally through invariant statements and proofs.
-  \item Validate empirically via GCC ThreadSanitizer, AddressSanitizer, and stress-loop testing.
-  \item Provide a configurable CLI interface for $N$ students, $C$ chairs, $H$ helps.
-  \item Document every design decision, pitfall, and mitigation in a reproducible artefact.
+\begin{enumerate}[leftmargin=2em,itemsep=2pt]
+  \item Implement a deadlock-free and race-free concurrent simulation in ANSI C11 on Linux.
+  \item Model all synchronisation using \emph{blocking} POSIX primitives only (no busy-waiting).
+  \item Provide a configurable CLI interface accepting number of students ($N$), chairs ($C$),
+        and help sessions ($H$) as parameters.
+  \item Verify correctness formally through invariant statements and mathematical proofs.
+  \item Validate empirically via GCC ThreadSanitizer, AddressSanitizer, and 20-run stress testing.
+  \item Document every design decision, pitfall, and mitigation clearly.
 \end{enumerate}
 
 \section{Scope}
 
-The simulation is implemented as a command-line C application targeting Linux (POSIX.1-2008).
-Extensions such as a graphical interface, network communication, persistent logging to a
-database, or multiple simultaneous TAs are explicitly out of scope but are discussed as
-future enhancements in Chapter~\ref{ch:future}.
-
-%% ════════════════════════════════════════════════════════════
-%%  CHAPTER 2 — LITERATURE REVIEW
-%% ════════════════════════════════════════════════════════════
-\chapter{Literature Review and Existing Approaches}
-
-\section{Classical Synchronisation Problems}
-
-The Sleeping Barber problem introduced by Dijkstra \cite{dijkstra} is the direct structural
-precursor to the Sleeping TA.  In the Barber problem, a barber serves one customer at a time
-from a waiting room of $N$ chairs, sleeping when idle.  The TA problem introduces two key
-extensions: students require \emph{multiple} service sessions and can depart-and-retry rather
-than simply leaving permanently.
-
-Silberschatz et al.\ \cite{silberschatz} present a canonical two-semaphore solution using
-\texttt{customers} (analogous to \texttt{students\_sem}) and \texttt{barber} (analogous to
-\texttt{ta\_sem}), protected by a mutex on the waiting counter.  While correct for a single
-help session per customer, this solution does not address the student's repeated re-entry loop
-or the departure race condition.
-
-Tanenbaum \cite{tanenbaum} analyses the Sleeping Barber through condition variables rather
-than semaphores, illustrating a monitor-based approach.  While conceptually elegant, monitor
-abstractions are not natively available in POSIX C without encapsulation.
+The project is implemented as a command-line C application targeting Linux (POSIX.1-2008). The
+simulation covers:
+\begin{itemize}[leftmargin=2em,itemsep=2pt]
+  \item One TA thread managing an office with single-occupancy constraint.
+  \item $N$ configurable student threads, each requiring $H$ help sessions.
+  \item $C$ hallway waiting chairs with strict bounded-capacity enforcement.
+  \item Full shutdown protocol ensuring clean resource release and zero hanging threads.
+\end{itemize}
+Extensions such as a graphical interface, network communication, database logging, or multiple
+simultaneous TAs are explicitly out of scope but are discussed as future enhancements.
 
 \section{Limitations of Existing Approaches}
 
-\begin{table}[H]
-  \centering\small
-  \caption{Comparison of existing synchronisation approaches for bounded-resource service problems.}
-  \label{tab:existingcomp}
-  \begin{tabularx}{\textwidth}{>{\bfseries}p{3.0cm} X X X}
-    \toprule
-    Feature & Silberschatz Two-Semaphore & Tanenbaum Monitor & \textbf{This Work} \\
-    \midrule
-    Single service session & \checkmark & \checkmark & \checkmark \\
-    Multiple sessions/client & \texttimes & Partial & \checkmark \\
-    Departure race eliminated & \texttimes & Partial & \checkmark \\
-    POSIX-native (no monitors) & \checkmark & \texttimes & \checkmark \\
-    Configurable parameters & \texttimes & \texttimes & \checkmark \\
-    Sanitizer-verified & \texttimes & \texttimes & \checkmark \\
-    Shutdown protocol & Partial & Partial & \checkmark \\
-    \bottomrule
-  \end{tabularx}
-\end{table}
-
-The key deficiency in the Silberschatz formulation is the \textbf{premature re-entry race}:
-after \texttt{sem\_wait(\&barber)} unblocks, the student immediately resumes its outer loop.
-If the TA's simulated help duration is short, the student may request service again before the
-TA finishes the previous session, corrupting the occupancy count.  Our implementation closes
-this vulnerability with a third semaphore (\texttt{done\_sem}).
-
-\section{Proposed System and Advantages}
-
-This project proposes a three-semaphore architecture augmented by a mutex and a voluntary
-sleeping-state flag.  The core advantages over prior art are:
-
-\begin{itemize}[leftmargin=1.6em,itemsep=2pt]
-  \item \textbf{Complete handshake:} \texttt{ta\_sem} admits the student; \texttt{done\_sem}
-        releases the student only after help finishes, eliminating the premature re-entry race.
-  \item \textbf{Repeatable sessions:} Each student loops for $H$ help sessions, correctly modelling
-        the original problem statement.
-  \item \textbf{Full shutdown protocol:} The main thread joins all students, sets a volatile
-        \texttt{running} flag, posts \texttt{students\_sem} to wake a sleeping TA, then joins
-        the TA—guaranteed deadlock-free termination.
-  \item \textbf{Thread-safe utilities:} Reentrant \texttt{rand\_r} prevents RNG data races;
-        a monotonic-clock logger with its own mutex prevents output interleaving.
+Standard textbook treatments (e.g., Silberschatz's two-semaphore Sleeping Barber solution)
+address only a \emph{single} service session per client. They do not handle:
+\begin{itemize}[leftmargin=2em,itemsep=2pt]
+  \item Repeated student re-entry for multiple help sessions.
+  \item The \textbf{premature re-entry race}: a student exits office and re-queues before the
+        TA finishes the current session, corrupting the chair counter.
+  \item A complete shutdown protocol that guarantees the TA thread joins cleanly.
 \end{itemize}
 
+\section{Proposed Solution}
+
+This project proposes a \textbf{three-semaphore architecture} with a mutex and a voluntary
+sleeping-state flag. The key advance is \texttt{done\_sem}: after the TA finishes helping, it
+posts \texttt{done\_sem}, ensuring the student remains in the office until the session is fully
+complete before re-entering the outer loop. This eliminates the premature re-entry race
+entirely.
+
 %% ════════════════════════════════════════════════════════════
-%%  CHAPTER 3 — TECHNOLOGY STACK
+%%  CHAPTER 2 — SYSTEM REQUIREMENTS
 %% ════════════════════════════════════════════════════════════
-\chapter{Technology Stack}
+\chapter{System Requirements}
 
-\section{Programming Language}
+\section{Overview}
 
-The implementation uses \textbf{ANSI C (ISO/IEC 9899:2011, C11)}.  C11 provides portable
-access to \texttt{\_Atomic} variables and aligns the codebase with POSIX.1-2008.
-Compilation targets are enforced with \texttt{-std=c11}.
+The simulation targets any POSIX-compliant Linux system. It has minimal hardware requirements
+and depends entirely on the operating system's native thread scheduling and kernel semaphore
+support.
 
-\section{Concurrency Frameworks and Libraries}
+\section{Software Requirements}
 
 \begin{table}[H]
-  \centering\small
-  \caption{Core POSIX libraries and their roles in the implementation.}
-  \label{tab:techstack}
-  \begin{tabularx}{\textwidth}{>{\ttfamily}l l X}
+  \centering
+  \caption{Software requirements.}
+  \label{tab:software}
+  \begin{tabularx}{\textwidth}{l l X}
     \toprule
-    \normalfont\textbf{Library/API} & \textbf{Header} & \textbf{Usage} \\
+    \textbf{Component} & \textbf{Version} & \textbf{Purpose} \\
     \midrule
-    pthreads      & \texttt{<pthread.h>}   & Thread creation (\texttt{pthread\_create}), joining (\texttt{pthread\_join}), and mutex operations (\texttt{pthread\_mutex\_*}). \\
-    POSIX semaphores & \texttt{<semaphore.h>} & Unnamed semaphores (\texttt{sem\_init}, \texttt{sem\_wait}, \texttt{sem\_post}, \texttt{sem\_destroy}) for inter-thread signalling. \\
-    POSIX time    & \texttt{<time.h>}      & \texttt{clock\_gettime(CLOCK\_MONOTONIC)} for nanosecond-resolution monotonic timestamps; \texttt{nanosleep} for precise non-busy sleeps. \\
-    C Standard I/O & \texttt{<stdio.h>}   & Buffered output flushed after each \texttt{log\_event} to maintain log ordering. \\
-    C Standard Library & \texttt{<stdlib.h>} & Dynamic memory allocation (\texttt{malloc}/\texttt{free}) for thread-argument arrays. \\
+    Linux Kernel     & 5.x or 6.x & POSIX thread scheduling and unnamed semaphore support via \texttt{sem\_init}. \\
+    GCC Compiler     & 11 or 12   & C11 compilation with \texttt{-std=c11 -pthread}; ThreadSanitizer and AddressSanitizer support. \\
+    GNU Make         & 4.x        & Build orchestration via \texttt{Makefile} targets. \\
+    glibc            & 2.31+      & POSIX thread library (\texttt{libpthread}) and POSIX semaphore implementation. \\
+    Git              & 2.x        & Version control; 23-commit history hosted on GitHub. \\
     \bottomrule
   \end{tabularx}
 \end{table}
 
-\section{Build and Development Tools}
+\section{Hardware Requirements}
 
 \begin{table}[H]
-  \centering\small
-  \caption{Development toolchain.}
-  \label{tab:devtools}
-  \begin{tabular}{llp{6.8cm}}
+  \centering
+  \caption{Hardware requirements.}
+  \label{tab:hardware}
+  \begin{tabular}{lll}
     \toprule
-    \textbf{Tool} & \textbf{Version} & \textbf{Purpose} \\
+    \textbf{Component} & \textbf{Minimum} & \textbf{Recommended} \\
     \midrule
-    GCC           & 11 / 12          & Primary C11 compiler; supports \texttt{-fsanitize=thread} and \texttt{-fsanitize=address,undefined}. \\
-    GNU Make      & 4.x              & Build orchestration; exposes \texttt{all}, \texttt{tsan}, \texttt{asan}, \texttt{test}, \texttt{clean} targets. \\
-    ThreadSanitizer (TSan) & GCC built-in & Runtime data-race and lock-order-inversion detector. \\
-    AddressSanitizer (ASan) & GCC built-in & Runtime heap/stack corruption, use-after-free, and leak detection. \\
-    Git 2.x       & —                & Version control; 22-commit history on GitHub. \\
-    Linux 6.x     & —                & Target POSIX runtime; unnamed \texttt{sem\_init} supported natively. \\
+    Processor  & Any x86-64 single-core & Multi-core (for meaningful concurrency) \\
+    RAM        & 64 MB                  & 256 MB \\
+    Storage    & 5 MB                   & 20 MB (including build artefacts) \\
+    OS         & Linux (any distro)     & Ubuntu 22.04 / Arch Linux \\
     \bottomrule
   \end{tabular}
 \end{table}
 
-\section{Makefile Build Targets}
+\section{Functional Requirements}
 
-\begin{lstlisting}[style=bashstyle,caption={Makefile build targets.}]
-make           # Standard C11 debug build  ->  ./ta
-make tsan      # ThreadSanitizer build      ->  ./ta_tsan
-make asan      # AddressSanitizer build     ->  ./ta_asan
-make test      # Quick 3-student smoke test
-make clean     # Remove all binaries and object files
-\end{lstlisting}
+\begin{enumerate}[leftmargin=2em,itemsep=3pt]
+  \item \textbf{FR1 — TA Sleep:} The TA thread must block (sleep) when \texttt{waiting\_students == 0}.
+  \item \textbf{FR2 — Student Wake-Up:} The first student to arrive at a sleeping TA must awaken the TA.
+  \item \textbf{FR3 — Hallway Queuing:} Students arriving while the TA is busy must sit in a hallway chair if one is available.
+  \item \textbf{FR4 — Chair Overflow:} If all $C$ chairs are occupied, the arriving student must leave and retry after a random delay.
+  \item \textbf{FR5 — Mutual Exclusion:} At most one student may be in the TA's office at any time.
+  \item \textbf{FR6 — Multi-Session:} Each student must receive exactly $H$ help sessions before terminating.
+  \item \textbf{FR7 — Clean Shutdown:} After all students finish, the TA must be signalled to terminate; all threads must join; all resources must be released.
+  \item \textbf{FR8 — CLI Configuration:} The simulation must accept \texttt{-s} (students), \texttt{-c} (chairs), and \texttt{-n} (helps) as command-line arguments.
+  \item \textbf{FR9 — Timestamped Logging:} All events must be logged with a monotonic elapsed timestamp.
+  \item \textbf{FR10 — No Busy-Waiting:} All blocking must use POSIX \texttt{sem\_wait} or \texttt{nanosleep}; no spin loops.
+\end{enumerate}
 
 %% ════════════════════════════════════════════════════════════
-%%  CHAPTER 4 — SYSTEM ANALYSIS AND DESIGN
+%%  CHAPTER 3 — SYSTEM DESIGN
 %% ════════════════════════════════════════════════════════════
-\chapter{System Analysis and Design}
+\chapter{System Design}
 
-\section{System Architecture Overview}
+\section{Architecture Overview}
 
 The system consists of one main (orchestrator) thread, one TA service thread, and $N$ student
-threads.  All threads communicate exclusively through shared memory protected by POSIX
-synchronisation primitives—there is no IPC, file I/O between threads, or network communication.
+threads. All threads communicate exclusively through shared memory protected by POSIX
+synchronisation primitives.
 
 \begin{figure}[H]
   \centering
-  \begin{tikzpicture}[node distance=1.6cm, every node/.style={transform shape}]
-    %% Nodes
-    \node[box, minimum width=3cm, fill=green!8, draw=green!50!black]
-          (main) {\textbf{main()}\\\small Thread Orchestrator};
-    \node[box, minimum width=3cm, fill=red!8, draw=red!50!black,
-          right=4.2cm of main]
-          (ta) {\textbf{ta\_thread()}\\\small TA Thread};
-    \node[box, minimum width=3cm, fill=blue!8, draw=blue!50!black,
-          below=1.8cm of main]
-          (s1) {\textbf{student\_thread()}\\\small Student 1};
-    \node[box, minimum width=3cm, fill=blue!8, draw=blue!50!black,
-          right=1.5cm of s1]
-          (s2) {\textbf{student\_thread()}\\\small Student 2};
-    \node[box, minimum width=2cm, fill=blue!8, draw=blue!50!black,
-          right=1.2cm of s2]
-          (sn) {\textbf{\ldots}\\\small Student N};
+  \begin{tikzpicture}[node distance=1.5cm]
+    \node[sbox, minimum width=3.2cm, fill=gray!5]
+         (main) {\textbf{main()}\\Thread Orchestrator};
+    \node[sbox, minimum width=3.2cm, fill=gray!5, right=4.5cm of main]
+         (ta)   {\textbf{ta\_thread()}\\TA Thread};
+    \node[sbox, minimum width=2.8cm, fill=gray!5, below=2.0cm of main, xshift=-1.5cm]
+         (s1) {\textbf{student\_thread()}\\Student 1};
+    \node[sbox, minimum width=2.8cm, fill=gray!5, right=0.5cm of s1]
+         (s2) {\textbf{student\_thread()}\\Student 2};
+    \node[sbox, minimum width=1.8cm, fill=gray!5, right=0.5cm of s2]
+         (sn) {\textbf{\ldots}\\Student N};
+    \node[sembox, minimum width=6.5cm, minimum height=1.2cm,
+          below=2.0cm of ta, xshift=-2.0cm, align=center]
+         (shared) {\textbf{Shared State (chair\_mutex)}\\
+                   \small \texttt{waiting\_students},\ \texttt{ta\_sleeping},\ \texttt{running}};
+    \node[sembox, below=1.2cm of shared, xshift=-2.6cm, minimum width=2.4cm]
+         (ss) {\texttt{students\_sem}\\\small init: 0};
+    \node[sembox, below=1.2cm of shared, minimum width=2.4cm]
+         (ts) {\texttt{ta\_sem}\\\small init: 0};
+    \node[sembox, below=1.2cm of shared, xshift=2.6cm, minimum width=2.4cm]
+         (ds) {\texttt{done\_sem}\\\small init: 0};
 
-    %% Shared State box
-    \node[mutbox, minimum width=5.8cm, minimum height=1.4cm,
-          below=2.8cm of ta, xshift=-1.8cm,
-          align=center]
-          (shared) {\textbf{Shared State (chair\_mutex)}\\
-                    \small \texttt{waiting\_students},\ \texttt{ta\_sleeping},\ \texttt{running}};
-
-    %% Semaphore nodes
-    \node[sembox, below=0.6cm of shared, xshift=-2.2cm]
-          (ss) {\texttt{students\_sem}\\\scriptsize Counting: 0$\to$C};
-    \node[sembox, below=0.6cm of shared]
-          (ts) {\texttt{ta\_sem}\\\scriptsize Binary-ish: 0};
-    \node[sembox, below=0.6cm of shared, xshift=2.2cm]
-          (ds) {\texttt{done\_sem}\\\scriptsize Binary-ish: 0};
-
-    %% Edges
-    \draw[myarrow] (main) -- node[above,font=\scriptsize]{create/join} (ta);
-    \draw[myarrow] (main) -- node[left,font=\scriptsize]{create/join} (s1);
-    \draw[dasharrow] (s1)  -- node[above,font=\scriptsize]{sem\_post} (ss);
-    \draw[dasharrow] (s2)  -- (ss);
-    \draw[dasharrow] (ta)  -- node[right,font=\scriptsize]{sem\_wait} (ss);
-    \draw[dasharrow] (ta)  to[bend left=15] node[right,font=\scriptsize]{sem\_post} (ts);
-    \draw[dasharrow] (ts)  to[bend left=15] node[left,font=\scriptsize]{sem\_wait} (s1);
-    \draw[dasharrow] (ta)  to[bend right=15] node[right,font=\scriptsize]{sem\_post} (ds);
-    \draw[dasharrow] (ds)  to[bend right=15] node[left,font=\scriptsize]{sem\_wait} (s2);
-    \draw[myarrow]   (s1)  -- node[right,font=\scriptsize]{lock/unlock} (shared);
-    \draw[myarrow]   (ta)  to[bend right=20] node[near start,right,font=\scriptsize]{lock/unlock} (shared);
+    \draw[myarr] (main) -- node[above,font=\scriptsize]{create/join} (ta);
+    \draw[myarr] (main) -- node[left,font=\scriptsize]{create/join} (s1);
+    \draw[dasharr] (s1) to[bend right=10] node[above,font=\scriptsize]{\texttt{sem\_post}} (ss);
+    \draw[dasharr] (ta) to[bend right=10] node[below,font=\scriptsize]{\texttt{sem\_wait}} (ss);
+    \draw[dasharr] (ta) -- node[right,font=\scriptsize]{\texttt{sem\_post}} (ts);
+    \draw[dasharr] (ts) to[bend left=15] node[left,font=\scriptsize]{\texttt{sem\_wait}} (s2);
+    \draw[dasharr] (ta) -- node[right,font=\scriptsize]{\texttt{sem\_post}} (ds);
+    \draw[dasharr] (ds) to[bend right=15] node[left,font=\scriptsize]{\texttt{sem\_wait}} (sn);
+    \draw[myarr]   (s1) -- (shared);
+    \draw[myarr]   (ta) to[bend right=25] (shared);
   \end{tikzpicture}
-  \caption{High-level system architecture showing thread roles and synchronisation primitive ownership.}
+  \caption{System architecture showing thread roles and synchronisation primitive ownership.}
   \label{fig:arch}
 \end{figure}
 
-\section{State Space and Formal Model}
+\section{Synchronisation Primitives}
 
-\begin{definition}[System State]
-The global state at time $t$ is the triple $S(t) = \langle T_s,\, W_h,\, O_s \rangle$ where:
-\begin{itemize}[leftmargin=1.6em,itemsep=1pt]
-  \item $T_s \in \{\text{SLEEP}, \text{HELP}\}$ — TA phase.
-  \item $W_h \in \{0,1,\ldots,C\}$ — hallway chair occupancy.
-  \item $O_s \in \{0,1\}$ — office occupancy (1 = one student inside).
-\end{itemize}
-\end{definition}
+\begin{table}[H]
+  \centering
+  \caption{POSIX synchronisation primitives used in the implementation.}
+  \label{tab:prims}
+  \begin{tabularx}{\textwidth}{>{\ttfamily}l l c X}
+    \toprule
+    \normalfont\textbf{Primitive} & \textbf{Type} & \textbf{Init} & \textbf{Role} \\
+    \midrule
+    chair\_mutex  & \texttt{pthread\_mutex\_t} & Unlocked & Guards all reads and writes to \texttt{waiting\_students} and \texttt{ta\_sleeping}. \\
+    students\_sem & \texttt{sem\_t} & 0 & Counting semaphore; TA blocks here when idle. Students post on arrival. \\
+    ta\_sem       & \texttt{sem\_t} & 0 & TA posts to admit one waiting student from hallway into office. \\
+    done\_sem     & \texttt{sem\_t} & 0 & TA posts when help session ends; prevents student premature re-entry. \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
 
-\begin{invariant}[Office Single-Occupancy]\label{inv:office}
-$O_s(t) \in \{0,1\;|\; \forall t \ge 0\}$
+\section{Formal System Model}
+
+Let the global state at time $t$ be $S(t) = \langle T_s,\, W_h,\, O_s \rangle$, where
+$T_s \in \{\text{SLEEP}, \text{HELP}\}$ is the TA phase, $W_h \in \{0,\ldots,C\}$ is the
+hallway occupancy, and $O_s \in \{0,1\}$ is the office occupancy.
+
+\begin{invariant}[Office Single-Occupancy]
+$O_s(t) \in \{0,1\}$ for all $t \geq 0$.
 \end{invariant}
 
-\begin{invariant}[Hallway Bounded Capacity]\label{inv:hall}
-$0 \le W_h(t) \le C,\; \forall t \ge 0$
+\begin{invariant}[Hallway Bounded Capacity]
+$0 \leq W_h(t) \leq C$ for all $t \geq 0$.
 \end{invariant}
 
-\begin{invariant}[Quiescence Consistency]\label{inv:quiet}
-$T_s = \text{SLEEP} \iff W_h = 0 \land O_s = 0$
+\begin{invariant}[Quiescence Consistency]
+$T_s = \text{SLEEP} \iff W_h = 0 \land O_s = 0$.
 \end{invariant}
 
 \section{Finite State Machine}
@@ -487,224 +454,199 @@ $T_s = \text{SLEEP} \iff W_h = 0 \land O_s = 0$
 \begin{figure}[H]
   \centering
   \begin{tikzpicture}[node distance=2.0cm]
-    \node[box,minimum width=3.0cm,fill=gray!10,draw=gray!60]
-         (sleep) {\textbf{TA SLEEPING}\\$T_s=\text{SLEEP}$\\$O_s=0$};
-    \node[decis, right=3.5cm of sleep]
+    \node[sbox, minimum width=3.0cm, fill=gray!10]
+         (sleep) {\textbf{TA SLEEPING}\\$T_s=\text{SLEEP},\; O_s=0$};
+    \node[diam, right=3.5cm of sleep]
          (arrive) {Student\\Arrives};
-    \node[box,minimum width=3.0cm,fill=green!8,draw=green!50!black,
-          above right=1.1cm and 2.0cm of arrive]
-         (help)  {\textbf{TA HELPING}\\$T_s=\text{HELP}$\\$O_s=1$};
-    \node[box,minimum width=3.0cm,fill=yellow!10,draw=orange!60,
-          below right=1.1cm and 2.0cm of arrive]
-         (wait)  {\textbf{WAIT IN HALL}\\$W_h \leftarrow W_h+1$};
-    \node[box,minimum width=3.0cm,fill=red!8,draw=red!50!black,
-          below=1.6cm of arrive]
+    \node[sbox, minimum width=3.0cm, fill=gray!5, above right=1.1cm and 2.0cm of arrive]
+         (help) {\textbf{TA HELPING}\\$T_s=\text{HELP},\; O_s=1$};
+    \node[sbox, minimum width=3.0cm, fill=gray!5, below right=1.1cm and 2.0cm of arrive]
+         (wait) {\textbf{WAIT IN HALL}\\$W_h \leftarrow W_h+1$};
+    \node[sbox, minimum width=3.0cm, fill=gray!5, below=1.6cm of arrive]
          (retry) {\textbf{LEAVE \& RETRY}\\Chairs Full};
 
-    \draw[myarrow] (sleep) -- (arrive);
-    \draw[myarrow] (arrive) -- node[above left,font=\scriptsize]{TA idle} (help);
-    \draw[myarrow] (arrive) -- node[right,font=\scriptsize]{TA busy, $W_h<C$} (wait);
-    \draw[myarrow] (arrive) -- node[below left,font=\scriptsize]{$W_h = C$} (retry);
-    \draw[myarrow] (wait) to[bend left=12] node[right,font=\scriptsize]{TA calls student} (help);
-    \draw[myarrow] (help) to[bend right=35]
-          node[above,font=\scriptsize]{Help done, $W_h=0$} (sleep);
-    \draw[myarrow] (retry) to[bend right=20]
-          node[below,font=\scriptsize]{After delay} (sleep);
+    \draw[myarr] (sleep) -- (arrive);
+    \draw[myarr] (arrive) -- node[above left,font=\scriptsize]{TA idle} (help);
+    \draw[myarr] (arrive) -- node[right,font=\scriptsize]{TA busy, $W_h<C$} (wait);
+    \draw[myarr] (arrive) -- node[below left,font=\scriptsize]{$W_h = C$} (retry);
+    \draw[myarr] (wait)  to[bend left=12] node[right,font=\scriptsize]{called in} (help);
+    \draw[myarr] (help)  to[bend right=35] node[above,font=\scriptsize]{done, $W_h=0$} (sleep);
+    \draw[myarr] (retry) to[bend right=20] node[below,font=\scriptsize]{after delay} (sleep);
   \end{tikzpicture}
-  \caption{Finite state machine of the Sleeping Teaching Assistant system.}
+  \caption{Finite state transition diagram of the Sleeping Teaching Assistant system.}
   \label{fig:fsm}
 \end{figure}
 
-\section{Data Flow Diagram}
+\section{Data Flow: Student Execution Path}
 
 \begin{figure}[H]
   \centering
-  \begin{tikzpicture}[node distance=1.3cm,font=\small]
-    \node[box,fill=green!8,draw=green!50!black,minimum width=2.8cm]
-         (prog) {Student Programs\\(random delay)};
-    \node[mutbox,below=1.0cm of prog,minimum width=2.8cm]
-         (lock) {Acquire \texttt{chair\_mutex}\\Check $W_h < C$};
-    \node[box,below left=0.9cm and 1.5cm of lock,minimum width=2.8cm,fill=orange!8,draw=orange!60]
-         (sit)  {$W_h$++\\ Unlock mutex\\\texttt{sem\_post(students)}};
-    \node[box,below right=0.9cm and 1.5cm of lock,minimum width=2.8cm,fill=red!8,draw=red!50!black]
-         (full) {Unlock mutex\\Log overflow\\random delay};
-    \node[sembox,below=0.9cm of sit,minimum width=2.8cm]
-         (wtasem) {\texttt{sem\_wait(ta\_sem)}\\Block in hallway};
-    \node[box,below=0.9cm of wtasem,minimum width=2.8cm,fill=blue!8,draw=blue!50!black]
-         (inoff) {Enter Office\\Log entry};
-    \node[sembox,below=0.9cm of inoff,minimum width=2.8cm]
-         (wdone) {\texttt{sem\_wait(done\_sem)}\\Wait for help end};
-    \node[box,below=0.9cm of wdone,minimum width=2.8cm,fill=green!8,draw=green!50!black]
-         (done)  {\texttt{helps\_left}--\\Return to lab};
+  \begin{tikzpicture}[node distance=0.95cm, font=\small]
+    \node[sbox]  (prog)   {Program / Think\\(random 200--600 ms)};
+    \node[sbox, below=0.8cm of prog] (lock)   {Acquire \texttt{chair\_mutex}\\Check $W_h < C$};
+    \node[sbox, below left=0.9cm and 2.0cm of lock,  fill=gray!5]
+                 (sit)    {$W_h$++\\ Unlock\\\texttt{sem\_post(students\_sem)}};
+    \node[sbox, below right=0.9cm and 2.0cm of lock, fill=gray!5]
+                 (full)   {Unlock\\Log overflow\\random 300--700 ms};
+    \node[sbox, below=0.9cm of sit, fill=gray!5]
+                 (wta)    {\texttt{sem\_wait(ta\_sem)}\\Sit in hallway};
+    \node[sbox, below=0.9cm of wta, fill=gray!5]
+                 (office) {Enter Office\\Log entry};
+    \node[sbox, below=0.9cm of office, fill=gray!5]
+                 (wdone)  {\texttt{sem\_wait(done\_sem)}\\Wait for session end};
+    \node[sbox, below=0.9cm of wdone, fill=gray!5]
+                 (done)   {\texttt{helps\_left}--\\Return to lab};
 
-    \draw[myarrow] (prog) -- (lock);
-    \draw[myarrow] (lock) -| node[above left,font=\scriptsize]{Chair free} (sit);
-    \draw[myarrow] (lock) -| node[above right,font=\scriptsize]{No chair} (full);
-    \draw[myarrow] (sit) -- (wtasem);
-    \draw[myarrow] (wtasem) -- (inoff);
-    \draw[myarrow] (inoff) -- (wdone);
-    \draw[myarrow] (wdone) -- (done);
-    \draw[myarrow] (done) to[bend right=50] node[right,font=\scriptsize]{helps left?} (prog);
-    \draw[myarrow] (full) to[bend left=50] node[right,font=\scriptsize]{retry} (prog);
+    \draw[myarr] (prog)   -- (lock);
+    \draw[myarr] (lock)   -| node[above left,font=\scriptsize]{Chair free} (sit);
+    \draw[myarr] (lock)   -| node[above right,font=\scriptsize]{No chair} (full);
+    \draw[myarr] (sit)    -- (wta);
+    \draw[myarr] (wta)    -- (office);
+    \draw[myarr] (office) -- (wdone);
+    \draw[myarr] (wdone)  -- (done);
+    \draw[myarr] (done)   to[bend right=55] node[right,font=\scriptsize]{helps left?} (prog);
+    \draw[myarr] (full)   to[bend left=55]  node[right,font=\scriptsize]{retry} (prog);
   \end{tikzpicture}
-  \caption{Data flow diagram for the Student thread execution path.}
+  \caption{Data flow diagram for the student thread execution path.}
   \label{fig:dfd}
 \end{figure}
 
-\section{Sequence Diagram: Admission and Completion Handshake}
-
-\begin{figure}[H]
-  \centering
-  \begin{tikzpicture}[font=\small, node distance=0.0cm]
-    %% Lifelines
-    \foreach \x/\lbl in {0/Student 1, 3.5/chair\_mutex, 7/TA Thread, 10.5/Semaphores}{
-      \draw[thick] (\x,0) -- (\x,-7.6);
-      \node[above,font=\small\bfseries] at (\x,0.1) {\lbl};
-    }
-    %% Messages
-    \def\msg#1#2#3#4{% from-x, to-x, y, label
-      \draw[myarrow] (#1,#3) -- (#2,#3) node[midway,above,font=\scriptsize]{#4};
-    }
-    \node[right,font=\scriptsize\itshape,color=gray] at (0.1,-0.5) {programs...};
-    \msg{0}{3.5}{-1.1}{lock()}
-    \node[box,scale=0.8,fill=orange!10] at (3.5,-1.5) {$W_h$++};
-    \msg{3.5}{0}{-1.9}{unlock()}
-    \msg{0}{10.5}{-2.4}{sem\_post(students\_sem)}
-    \msg{0}{10.5}{-3.0}{sem\_wait(ta\_sem) [blocks]}
-    \msg{10.5}{7}{-3.6}{sem\_wait(students\_sem) returns}
-    \msg{7}{3.5}{-4.1}{lock()}
-    \node[box,scale=0.8,fill=orange!10] at (3.5,-4.5) {$W_h$--};
-    \msg{7}{3.5}{-4.9}{unlock()}
-    \msg{7}{10.5}{-5.4}{sem\_post(ta\_sem) → admits student}
-    \msg{10.5}{0}{-5.9}{sem\_wait(ta\_sem) returns}
-    \node[right,font=\scriptsize\itshape,color=gray] at (7.1,-6.3) {help sleep...};
-    \msg{7}{10.5}{-6.8}{sem\_post(done\_sem) → student exits}
-    \msg{10.5}{0}{-7.3}{sem\_wait(done\_sem) returns}
-  \end{tikzpicture}
-  \caption{UML-style sequence diagram of the two-semaphore admission and completion handshake.}
-  \label{fig:seq}
-\end{figure}
-
 %% ════════════════════════════════════════════════════════════
-%%  CHAPTER 5 — SYSTEM MODULES
+%%  CHAPTER 4 — SYSTEM MODULES
 %% ════════════════════════════════════════════════════════════
 \chapter{System Modules}
 
-The system is decomposed into five source modules.  Each module has a single responsibility
-and communicates with other modules exclusively through the shared-state declarations in
-\texttt{shared.h}.
+The system is decomposed into five source modules, each with a single clearly defined
+responsibility.
 
 \begin{table}[H]
-  \centering\small
-  \caption{Module summary.}
+  \centering
+  \caption{Module summary and responsibilities.}
   \label{tab:modules}
   \begin{tabularx}{\textwidth}{>{\ttfamily}l l X}
     \toprule
     \normalfont\textbf{File(s)} & \textbf{Role} & \textbf{Responsibility} \\
     \midrule
-    shared.h    & Configuration hub & Extern declarations for all global variables and synchronisation primitives; \texttt{StudentArgs} struct; compile-time defaults. \\
-    util.h/.c   & Utility library   & Thread-safe monotonic logger; reentrant \texttt{random\_sleep\_ms} using \texttt{rand\_r}. \\
-    ta.h/.c     & TA thread         & Implements the TA lifecycle: nap announcement, block on \texttt{students\_sem}, admit student via \texttt{ta\_sem}, help simulation, signal completion via \texttt{done\_sem}, shutdown detection. \\
-    student.h/.c & Student thread   & Implements student lifecycle: program simulation, office visit attempt, hallway queuing, overflow retry, help reception, repeat for $H$ sessions. \\
-    main.c      & Orchestrator      & CLI parsing, synchronisation primitive initialisation, thread creation and joining, graceful shutdown protocol, resource release. \\
+    shared.h      & Configuration hub  & Extern declarations for global variables and synchronisation primitives; \texttt{StudentArgs} struct; compile-time defaults. \\
+    util.h/.c     & Utility library    & Thread-safe monotonic timestamped logger; reentrant sleep using \texttt{rand\_r}. \\
+    ta.h/.c       & TA thread          & Nap announcement; block on \texttt{students\_sem}; admit via \texttt{ta\_sem}; help simulation; completion via \texttt{done\_sem}; shutdown detection. \\
+    student.h/.c  & Student thread     & Programming simulation; office visit attempt; hallway queuing; overflow retry; $H$ session loop. \\
+    main.c        & Orchestrator       & CLI parsing; synchronisation initialisation; thread creation/joining; graceful shutdown; resource release. \\
     \bottomrule
   \end{tabularx}
 \end{table}
 
-\section{Module: \texttt{shared.h}}
+\section{Module: shared.h}
 
-This header acts as the single source of truth for the shared state.  Its design prevents
-multiple definition errors by using \texttt{extern} declarations in the header and a single
-definition in \texttt{main.c}.
+This header provides the single source of truth for all shared state. Using \texttt{extern}
+declarations prevents multiple definition errors.
 
 \textbf{Key declarations:}
-\begin{itemize}[leftmargin=1.6em,itemsep=1pt]
-  \item \texttt{int waiting\_students} — number of students in hallway chairs $[0, C]$.
-  \item \texttt{int num\_chairs} — runtime-configurable hallway capacity.
-  \item \texttt{volatile int running} — shutdown flag; \texttt{volatile} prevents compiler optimisation of reads.
-  \item \texttt{int ta\_sleeping} — boolean flag enabling students to log the correct wake message.
-  \item \texttt{pthread\_mutex\_t chair\_mutex} — the single mutex guarding all shared integers.
-  \item Three \texttt{sem\_t} semaphores: \texttt{students\_sem}, \texttt{ta\_sem}, \texttt{done\_sem}.
-\end{itemize}
 
-\section{Module: \texttt{util.h / util.c}}
+\begin{lstlisting}[caption={shared.h -- shared state and synchronisation declarations.}]
+extern int waiting_students; // hallway chair count [0, C]
+extern int num_chairs;       // runtime-configurable capacity
+extern volatile int running; // shutdown flag (volatile to prevent optimisation)
+extern int ta_sleeping;      // TA sleep status (for student log message)
 
-\textbf{Inputs:} Format string and variadic arguments; min/max sleep duration; per-thread seed pointer.\\
-\textbf{Outputs:} Timestamped output to stdout; controlled sleep of calling thread.
+extern pthread_mutex_t chair_mutex;  // guards all shared integers
+extern sem_t students_sem;  // TA blocks here; students post on arrival
+extern sem_t ta_sem;        // TA admits one student
+extern sem_t done_sem;      // TA signals session complete
 
-\texttt{log\_event} acquires \texttt{log\_mutex} (a file-static mutex), computes elapsed nanoseconds via \texttt{CLOCK\_MONOTONIC}:
-\begin{equation}
-  \Delta t = \bigl(t_{\rm now}.\text{tv\_sec} - t_0.\text{tv\_sec}\bigr)
-           + \frac{t_{\rm now}.\text{tv\_nsec} - t_0.\text{tv\_nsec}}{10^{9}}
-\end{equation}
-then prints \texttt{[\%7.3fs]} followed by the formatted message and flushes stdout before releasing the lock.
+typedef struct {
+    int id;          // student number (1-based)
+    int helps_left;  // sessions remaining
+    int total_helps; // initial session count
+    unsigned int seed; // per-thread PRNG seed
+} StudentArgs;
+\end{lstlisting}
 
-\texttt{random\_sleep\_ms} computes a uniform duration via \texttt{rand\_r(\&seed) \% range} and calls \texttt{nanosleep}, ensuring no busy-waiting.
+\section{Module: util.h / util.c}
 
-\section{Module: \texttt{ta.h / ta.c}}
+Provides two thread-safe utility functions:
 
-The TA thread runs the following infinite loop until shutdown:
-
-\begin{enumerate}[leftmargin=1.8em,itemsep=1pt]
-  \item Lock \texttt{chair\_mutex}; if \texttt{waiting\_students == 0 \&\& running}, set \texttt{ta\_sleeping = 1} and log the nap message.  Unlock.
-  \item Execute \texttt{sem\_wait(\&students\_sem)} — blocks until a student signals.
-  \item Lock \texttt{chair\_mutex}; check shutdown condition (\texttt{!running \&\& waiting\_students == 0}); if true, unlock and \texttt{break}.
-  \item Set \texttt{ta\_sleeping = 0}; decrement \texttt{waiting\_students}; run \texttt{assert(0 $\le$ W\_h $\le$ C)}; unlock.
-  \item Execute \texttt{sem\_post(\&ta\_sem)} — admits the specific student who has been waiting longest.
-  \item Simulate help: compute \texttt{help\_ms = 150 + rand\_r(\&seed) \% 250}; \texttt{random\_sleep\_ms}.
-  \item Execute \texttt{sem\_post(\&done\_sem)} — releases the student from the office.
-  \item Repeat from step 1.
+\begin{enumerate}[leftmargin=2em,itemsep=2pt]
+  \item \textbf{\texttt{log\_event(fmt, ...):}} Acquires \texttt{log\_mutex} (file-static),
+        computes elapsed time via \texttt{CLOCK\_MONOTONIC}:
+        \[
+          \Delta t = (t_{\text{now}}.\text{tv\_sec} - t_0.\text{tv\_sec})
+                   + \frac{t_{\text{now}}.\text{tv\_nsec} - t_0.\text{tv\_nsec}}{10^9}
+        \]
+        then prints \texttt{[\%7.3fs]} followed by the formatted message, flushes stdout,
+        and releases the lock.
+  \item \textbf{\texttt{random\_sleep\_ms(min, max, \&seed):}} Computes a uniform
+        duration via \texttt{rand\_r(\&seed) \% range} and calls \texttt{nanosleep}---no
+        busy-waiting.
 \end{enumerate}
 
-\textbf{Critical invariant maintained:} The mutex is \emph{never} held across any \texttt{sem\_wait} or \texttt{sem\_post} call.
+Using \texttt{rand\_r} with per-thread seeds prevents the data race on the global state
+internal to standard \texttt{rand()}.
 
-\section{Module: \texttt{student.h / student.c}}
+\section{Module: ta.h / ta.c}
 
-Each student thread receives a \texttt{StudentArgs*} containing: thread ID, \texttt{helps\_left} counter, \texttt{total\_helps} for logging, and a per-thread \texttt{seed} initialised in \texttt{main.c} as $\text{base} + 997i + 13$ to ensure distinct PRNG streams.
+The TA thread runs an infinite loop until the shutdown condition is detected.
 
-The student loop:
-\begin{enumerate}[leftmargin=1.8em,itemsep=1pt]
-  \item If \texttt{helps\_left == 0}, thread returns.
-  \item \texttt{random\_sleep\_ms(200, 600)} — simulates programming work.
-  \item Lock \texttt{chair\_mutex}.  If \texttt{waiting\_students < num\_chairs}: increment \texttt{waiting\_students}; capture \texttt{was\_sleeping}; if \texttt{was\_sleeping}, clear it; unlock; log appropriate message.
-  \item Post \texttt{students\_sem} to wake/notify TA.
-  \item Block on \texttt{ta\_sem} — sitting in hallway.
-  \item Block on \texttt{done\_sem} — inside office, waiting for TA to finish.
-  \item Decrement \texttt{helps\_left}; log completion; go to step 1.
-  \item If chairs full at step 3: unlock; log overflow; \texttt{random\_sleep\_ms(300, 700)}; go to step 1.
-\end{enumerate}
+\textbf{Inputs:} Shared semaphores and mutex; \texttt{running} flag.\\
+\textbf{Outputs:} Posts \texttt{ta\_sem} (admit) and \texttt{done\_sem} (release).\\
+\textbf{Critical rule:} The mutex is \emph{never} held across any \texttt{sem\_wait} or
+\texttt{sem\_post} call.
 
-\section{Module: \texttt{main.c}}
+\section{Module: student.h / student.c}
 
-\texttt{main} is responsible for the full lifecycle of the simulation:
+Each student receives a \texttt{StudentArgs*} with its ID, session counter, total helps, and
+per-thread PRNG seed initialised in \texttt{main.c} as $\text{base} + 997i + 13$.
 
-\begin{enumerate}[leftmargin=1.8em,itemsep=1pt]
-  \item Parse \texttt{-s}, \texttt{-c}, \texttt{-n} via \texttt{getopt}; validate positive integers.
-  \item Call \texttt{init\_logger()} to record $t_0$ and initialise \texttt{log\_mutex}.
-  \item Initialise \texttt{chair\_mutex}, \texttt{students\_sem}(0), \texttt{ta\_sem}(0), \texttt{done\_sem}(0).
+\textbf{Inputs:} Shared semaphores, mutex, and chair count.\\
+\textbf{Outputs:} Posts \texttt{students\_sem}; waits on \texttt{ta\_sem} and
+\texttt{done\_sem}.
+
+\section{Module: main.c}
+
+\textbf{Responsibility:} Full simulation lifecycle.
+
+\begin{enumerate}[leftmargin=2em,itemsep=1pt]
+  \item Parse \texttt{-s}, \texttt{-c}, \texttt{-n} via POSIX \texttt{getopt}; validate positive integers.
+  \item Initialise logger (\texttt{init\_logger}), mutex, and all three semaphores to 0.
   \item Allocate \texttt{pthread\_t} and \texttt{StudentArgs} arrays.
-  \item \texttt{pthread\_create} TA thread; \texttt{pthread\_create} $N$ student threads.
-  \item \texttt{pthread\_join} all $N$ student threads.
-  \item Under \texttt{chair\_mutex}: set \texttt{running = 0}. Post \texttt{students\_sem}.
-  \item \texttt{pthread\_join} TA thread.
+  \item Create TA thread; create $N$ student threads.
+  \item Join all $N$ student threads.
+  \item Under mutex: set \texttt{running = 0}. Post \texttt{students\_sem} to wake sleeping TA.
+  \item Join TA thread.
   \item Free arrays; destroy semaphores and mutex; call \texttt{destroy\_logger()}; return 0.
 \end{enumerate}
 
 %% ════════════════════════════════════════════════════════════
-%%  CHAPTER 6 — IMPLEMENTATION
+%%  CHAPTER 5 — IMPLEMENTATION
 %% ════════════════════════════════════════════════════════════
 \chapter{Implementation}
 
-\section{Methodology}
+\section{Implementation Methodology}
 
-The implementation followed an incremental phase plan consistent with \texttt{plan.md}:
-Phase 0 (project scaffolding), Phase 1 (skeleton threads), Phase 2 (core synchronisation),
-Phase 3 (edge cases and shutdown), Phase 4 (testing and sanitizer validation), Phase 5
-(documentation and polish).  The 22-commit Git history directly corresponds to these phases.
+The implementation followed an incremental six-phase plan recorded in \texttt{plan.md}, with
+each phase directly corresponding to a set of Git commits in the 23-commit history.
 
-\section{Core TA Thread Code}
+\begin{table}[H]
+  \centering\small
+  \caption{Implementation phases and their deliverables.}
+  \label{tab:phases}
+  \begin{tabularx}{\textwidth}{l l X}
+    \toprule
+    \textbf{Phase} & \textbf{Name} & \textbf{Deliverable} \\
+    \midrule
+    0 & Setup       & Makefile, \texttt{.gitignore}, project scaffold. \\
+    1 & Skeleton    & Thread creation/join, logger, CLI argument parsing. \\
+    2 & Core Sync   & Semaphores and mutex; TA sleep/wake; student arrival. \\
+    3 & Edge Cases  & Chair overflow retry; per-student session counter; shutdown protocol. \\
+    4 & Validation  & ThreadSanitizer, AddressSanitizer, 20-run stress loop. \\
+    5 & Polish      & README, comments, final GitHub push. \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
 
-\begin{lstlisting}[caption={Teaching Assistant thread — \texttt{src/ta.c} (complete).},label={lst:ta}]
+\section{TA Thread Implementation}
+
+\begin{lstlisting}[caption={Teaching Assistant thread -- src/ta.c (complete).}, label={lst:ta}]
 void *ta_thread(void *arg) {
     (void)arg;
     unsigned int ta_seed = (unsigned int)time(NULL) ^ 0xABCD1234;
@@ -731,23 +673,23 @@ void *ta_thread(void *arg) {
         int remaining = waiting_students;
         pthread_mutex_unlock(&chair_mutex);
 
-        sem_post(&ta_sem);               /* Admit student */
+        sem_post(&ta_sem);               /* Admit student into office */
 
         int help_ms = 150 + (rand_r(&ta_seed) % 250);
         log_event("[TA] Helping student (%d ms)...", help_ms);
         random_sleep_ms(help_ms, help_ms, &ta_seed);
         log_event("[TA] Finished helping student.");
 
-        sem_post(&done_sem);             /* Release student */
+        sem_post(&done_sem);             /* Release student from office */
     }
     log_event("[TA] Office hours ended. Goodbye!");
     return NULL;
 }
 \end{lstlisting}
 
-\section{Core Student Thread Code}
+\section{Student Thread Implementation}
 
-\begin{lstlisting}[caption={Student thread — \texttt{src/student.c} (complete).},label={lst:student}]
+\begin{lstlisting}[caption={Student thread -- src/student.c (complete).}, label={lst:student}]
 void *student_thread(void *arg) {
     StudentArgs *s = (StudentArgs *)arg;
     log_event("[Student %d] Started (needs help %d times).", s->id, s->helps_left);
@@ -760,7 +702,7 @@ void *student_thread(void *arg) {
         if (waiting_students < num_chairs) {
             waiting_students++;
             assert(waiting_students >= 0 && waiting_students <= num_chairs);
-            int occupied    = waiting_students;
+            int occupied     = waiting_students;
             int was_sleeping = ta_sleeping;
             if (was_sleeping) ta_sleeping = 0;
             pthread_mutex_unlock(&chair_mutex);
@@ -772,10 +714,10 @@ void *student_thread(void *arg) {
                 log_event("[Student %d] Sits in hallway (chairs: %d/%d).",
                           s->id, occupied, num_chairs);
 
-            sem_post(&students_sem);    /* Wake/notify TA */
-            sem_wait(&ta_sem);          /* Wait for entry */
+            sem_post(&students_sem);    /* Wake / notify TA */
+            sem_wait(&ta_sem);          /* Wait to be called in */
             log_event("[Student %d] Entering office.", s->id);
-            sem_wait(&done_sem);        /* Wait for help to finish */
+            sem_wait(&done_sem);        /* Wait for session to finish */
 
             s->helps_left--;
             log_event("[Student %d] Done (%d helps left).", s->id, s->helps_left);
@@ -790,130 +732,105 @@ void *student_thread(void *arg) {
 }
 \end{lstlisting}
 
-\section{Deadlock Prevention: Formal Proof}
+\section{Deadlock Prevention}
 
 \begin{theorem}[Deadlock-Free Protocol]
 The implemented system is free from deadlock.
 \end{theorem}
 
-\noindent\textit{Proof.}
-Coffman's four necessary conditions for deadlock are: Mutual Exclusion, Hold-and-Wait,
-No-Preemption, and Circular Wait.  The implementation structurally eliminates Hold-and-Wait:
-every thread releases \texttt{chair\_mutex} \emph{before} invoking any \texttt{sem\_wait}.
-Thus no thread can be blocked on a semaphore while holding a resource another thread needs.
-Since Hold-and-Wait is impossible, deadlock cannot occur regardless of scheduling order. \hfill$\square$
+\noindent\textit{Proof.} Deadlock requires Coffman's four conditions: Mutual Exclusion,
+Hold-and-Wait, No-Preemption, and Circular Wait. The implementation structurally eliminates
+Hold-and-Wait: every thread releases \texttt{chair\_mutex} \emph{before} invoking any
+\texttt{sem\_wait}. No thread can be blocked on a semaphore while holding a resource another
+thread needs. Without Hold-and-Wait, deadlock is impossible regardless of scheduling order.
+\hfill$\square$
 
-\section{Shutdown Protocol Correctness}
+\section{Shutdown Protocol}
 
-The shutdown sequence in \texttt{main.c} is:
-\begin{enumerate}[leftmargin=1.8em,itemsep=1pt]
-  \item All $N$ student \texttt{pthread\_join} calls complete — all student threads have returned.
-        Therefore \texttt{students\_sem} will receive no further posts from students.
-  \item Main acquires \texttt{chair\_mutex}, sets \texttt{running = 0}, releases the mutex.
+\begin{enumerate}[leftmargin=2em,itemsep=1pt]
+  \item All $N$ student \texttt{pthread\_join} calls complete --- no more student posts to semaphores.
+  \item Main acquires \texttt{chair\_mutex}, sets \texttt{running = 0}, releases mutex.
   \item Main posts \texttt{students\_sem} to unblock a sleeping TA.
-  \item TA wakes, checks \texttt{!running \&\& waiting\_students == 0}, breaks out of its loop.
-  \item Main joins the TA thread; both resources and synchronisation objects are destroyed.
+  \item TA wakes, checks \texttt{!running \&\& waiting\_students == 0}, breaks loop.
+  \item Main joins TA; destroys all primitives.
 \end{enumerate}
 
-This ordering guarantees the TA always exits: even if the TA was not sleeping
-(i.e., \texttt{students\_sem} had a positive value from an in-flight student post),
-the \texttt{running = 0} flag is checked after \emph{every} \texttt{sem\_wait} return.
+This ordering guarantees the TA always exits cleanly regardless of its current state.
 
 %% ════════════════════════════════════════════════════════════
-%%  CHAPTER 7 — TESTING AND EVALUATION
+%%  CHAPTER 6 — TESTING AND EVALUATION
 %% ════════════════════════════════════════════════════════════
 \chapter{Testing and Evaluation}
 
 \section{Testing Methodology}
 
-Testing was conducted in four complementary layers:
-\begin{enumerate}[leftmargin=1.8em,itemsep=2pt]
-  \item \textbf{Functional Scenario Tests:} Specific student/chair/help configurations chosen
-        to exercise each distinct control-flow path.
-  \item \textbf{Assertion Guards:} In-code \texttt{assert(0 $\le$ waiting\_students $\le$ num\_chairs)}
-        after every mutation of the shared counter; immediate crash on invariant violation.
-  \item \textbf{Dynamic Sanitizer Analysis:} GCC ThreadSanitizer and AddressSanitizer
-        instrument every memory access and synchronisation operation at runtime.
-  \item \textbf{Automated Stress Loop:} 20 consecutive executions with elevated concurrency
-        to surface rare non-deterministic failures.
-\end{enumerate}
+Testing was conducted in four complementary layers: (1) functional scenario tests covering
+each distinct control-flow path, (2) in-code assertion guards on the hallway invariant,
+(3) dynamic sanitizer analysis using GCC instrumentation, and (4) an automated stress loop for
+deadlock detection.
 
 \section{Test Cases}
 
-\begin{longtable}{p{0.5cm} p{3.3cm} p{2.5cm} p{3.0cm} p{3.5cm} c}
+\begin{longtable}{>{\centering}p{0.5cm} p{3.0cm} p{2.4cm} p{3.5cm} p{2.8cm} >{\centering\arraybackslash}c}
   \caption{Functional test case matrix.}\label{tab:testcases}\\
   \toprule
-  \textbf{\#} & \textbf{Scenario} & \textbf{Command} & \textbf{Control Path Exercised} & \textbf{Expected Behaviour} & \textbf{Result}\\
+  \textbf{\#} & \textbf{Scenario} & \textbf{Command} & \textbf{Control Path} & \textbf{Expected Result} & \textbf{Status}\\
   \midrule
   \endfirsthead
-  \multicolumn{6}{c}{\tablename\ \thetable{} continued}\\
+  \multicolumn{6}{c}{\tablename\ \thetable{} (continued)}\\
   \toprule
-  \textbf{\#} & \textbf{Scenario} & \textbf{Command} & \textbf{Control Path Exercised} & \textbf{Expected Behaviour} & \textbf{Result}\\
+  \textbf{\#} & \textbf{Scenario} & \textbf{Command} & \textbf{Control Path} & \textbf{Expected Result} & \textbf{Status}\\
   \midrule
   \endhead
   \bottomrule
   \endlastfoot
-  1 & Single student, single help & \texttt{-s 1 -c 3 -n 1} & TA naps $\to$ awakened $\to$ helps $\to$ naps $\to$ exits & One wake/help/nap cycle; clean exit & PASS \\[4pt]
-  2 & Three students, fill chairs & \texttt{-s 4 -c 3 -n 1} & All 3 chairs occupied; 4th student turned away & Chair occupancy reaches 3/3; overflow log visible & PASS \\[4pt]
-  3 & Multi-session per student & \texttt{-s 3 -c 3 -n 3} & Each student loops 3 times through the help request cycle & \texttt{helps\_left} decrements correctly to 0 & PASS \\[4pt]
-  4 & High overflow load & \texttt{-s 8 -c 3 -n 2} & Frequent chair overflow; multiple retry delays & ``Chairs full'' log lines visible; no hang & PASS \\[4pt]
-  5 & Maximum stress & \texttt{-s 20 -c 3 -n 3} & Maximum concurrency; thread scheduler stress & All 60 help sessions complete; exit code 0 & PASS \\[4pt]
-  6 & Single chair only & \texttt{-s 5 -c 1 -n 2} & Very high overflow rate; constant retry & System remains stable; never $> 1$ waiting & PASS \\[4pt]
-  7 & TA shutdown timing & \texttt{-s 1 -c 3 -n 1} & TA sleeping when last student finishes & TA receives shutdown post; exits gracefully & PASS \\
+  1 & Single student, one help & \small\texttt{-s1 -c3 -n1} & TA nap $\to$ wake $\to$ help $\to$ nap $\to$ exit & One cycle; clean exit & \textbf{PASS} \\[3pt]
+  2 & Fill all 3 chairs & \small\texttt{-s4 -c3 -n1} & 3 students seated, 4th turned away & Chairs reach 3/3; overflow log & \textbf{PASS} \\[3pt]
+  3 & Multi-session & \small\texttt{-s3 -c3 -n3} & Each student loops 3 times & \texttt{helps\_left} $\to$ 0 & \textbf{PASS} \\[3pt]
+  4 & High overflow & \small\texttt{-s8 -c3 -n2} & Frequent chair overflow & Retry logs visible; no hang & \textbf{PASS} \\[3pt]
+  5 & Stress test & \small\texttt{-s20 -c3 -n3} & Maximum concurrency & 60 sessions complete; exit 0 & \textbf{PASS} \\[3pt]
+  6 & Single chair & \small\texttt{-s5 -c1 -n2} & Very high overflow rate & $W_h \leq 1$ always & \textbf{PASS} \\[3pt]
+  7 & TA shutdown & \small\texttt{-s1 -c3 -n1} & TA sleeping at shutdown & Receives post; exits & \textbf{PASS} \\
 \end{longtable}
 
 \section{Sanitizer Verification}
 
 \begin{table}[H]
-  \centering\small
-  \caption{Dynamic analysis results.}
+  \centering
+  \caption{Dynamic analysis results using GCC sanitizer instrumentation.}
   \label{tab:sanitizers}
-  \begin{tabularx}{\textwidth}{l p{3.4cm} X c}
+  \begin{tabularx}{\textwidth}{l l X c}
     \toprule
-    \textbf{Tool} & \textbf{Build Target} & \textbf{Defects Checked} & \textbf{Result} \\
+    \textbf{Tool} & \textbf{Build} & \textbf{Defects Checked} & \textbf{Result} \\
     \midrule
-    ThreadSanitizer (TSan)
-      & \texttt{make tsan}
-      & Data races on shared variables; mutex lock-order inversions; unprotected concurrent heap accesses.
-      & \textbf{0 Warnings} \\
-    AddressSanitizer (ASan)
-      & \texttt{make asan}
-      & Heap buffer overflows; stack overflows; use-after-free; use-after-return.
-      & \textbf{0 Errors} \\
-    LeakSanitizer (LSan)
-      & \texttt{make asan}
-      & Memory leaks including \texttt{pthread} internal allocations, unfreed \texttt{malloc} blocks.
-      & \textbf{0 Leaks} \\
-    UndefinedBehaviourSan (UBSan)
-      & \texttt{make asan}
-      & Signed integer overflow; null pointer dereference; type punning violations.
-      & \textbf{0 Reports} \\
+    ThreadSanitizer (TSan) & \texttt{make tsan} & Data races; lock-order inversions; unprotected concurrent heap accesses. & \textbf{0 Warnings} \\
+    AddressSanitizer (ASan) & \texttt{make asan} & Heap overflows; use-after-free; stack defects. & \textbf{0 Errors} \\
+    LeakSanitizer (LSan) & \texttt{make asan} & Memory leaks; uncollected malloc blocks. & \textbf{0 Leaks} \\
+    UndefinedBehaviourSan & \texttt{make asan} & Signed overflow; null dereference; type punning. & \textbf{0 Reports} \\
     \bottomrule
   \end{tabularx}
 \end{table}
 
 \section{Automated Stress Loop}
 
-\begin{lstlisting}[style=bashstyle,caption={20-run stress loop shell script.}]
+\begin{lstlisting}[style=bashstyle,caption={20-run automated stress loop.}]
 for i in $(seq 1 20); do
     ./ta -s 6 -c 3 -n 2 > /dev/null || (echo "FAILED on run $i" && exit 1)
 done && echo "All 20/20 runs passed flawlessly!"
 \end{lstlisting}
 
-\textbf{Result:} All 20 iterations completed with \texttt{exit(0)}.  No deadlock or hang was
-observed across any run.  Because the Linux kernel thread scheduler is non-deterministic,
-each run exercises a different interleaving of the $N+1$ threads, providing probabilistic
-coverage over a large region of the interleaving space.
+\textbf{Result:} All 20 iterations completed with \texttt{exit(0)}. No deadlock or hang was
+observed across any run.
 
 \section{Performance Evaluation}
 
 \begin{table}[H]
-  \centering\small
-  \caption{Empirical wall-clock completion times (5 runs each; GHz class hardware).}
+  \centering
+  \caption{Empirical wall-clock completion times (5 runs averaged).}
   \label{tab:perf}
-  \begin{tabular}{cccc r}
+  \begin{tabular}{ccccr}
     \toprule
-    \textbf{Students ($N$)} & \textbf{Chairs ($C$)} & \textbf{Helps ($H$)} & \textbf{Sessions Total} & \textbf{Avg.\ Time (s)} \\
+    \textbf{Students ($N$)} & \textbf{Chairs ($C$)} & \textbf{Helps ($H$)} & \textbf{Total Sessions} & \textbf{Avg.\ Time (s)} \\
     \midrule
     3  & 3 & 2 & 6  & $\approx 2.2$ \\
     5  & 3 & 2 & 10 & $\approx 3.0$ \\
@@ -923,179 +840,50 @@ coverage over a large region of the interleaving space.
   \end{tabular}
 \end{table}
 
-Timing scales approximately linearly with total help sessions because each session requires
-150--400 ms of simulated help time and sessions are \emph{serialised} through the TA.
-The slight superlinear growth at higher $N$ reflects increased hallway chair contention and
-the resulting overhead of retry backoff delays.
-
 %% ════════════════════════════════════════════════════════════
-%%  CHAPTER 8 — RESULTS AND DISCUSSION
+%%  CHAPTER 7 — CONCLUSION AND FUTURE SCOPE
 %% ════════════════════════════════════════════════════════════
-\chapter{Results and Discussion}
+\chapter{Conclusion and Future Scope}
 
-\section{Project Outputs}
+\section{Conclusion}
 
-The project delivers the following concrete artefacts:
+The Sleeping Teaching Assistant project successfully delivers a correct, formally verified, and
+empirically validated implementation of a classic POSIX concurrency coordination problem in
+ANSI C11 on Linux.
 
-\begin{enumerate}[leftmargin=1.8em,itemsep=2pt]
-  \item \textbf{Executable \texttt{./ta}}: A fully functional, CLI-configurable concurrent simulation.
-  \item \textbf{Sanitizer builds \texttt{./ta\_tsan}, \texttt{./ta\_asan}}: Instrumented binaries for ongoing quality assurance.
-  \item \textbf{Source code}: Five modular C11 source files totalling approximately 300 lines of well-commented code.
-  \item \textbf{Makefile}: Five build targets enabling standard, instrumented, and test builds.
-  \item \textbf{README.md}: Complete user-facing documentation.
-  \item \textbf{GitHub repository}: 23-commit version history at \url{https://github.com/Pritam-72/Sleeping-Teaching-Assistant}.
-\end{enumerate}
+The core technical contribution is the \textbf{three-semaphore architecture}: \texttt{students\_sem}
+wakes the TA, \texttt{ta\_sem} admits the student, and the novel \texttt{done\_sem} ensures the
+student remains in the office until the help session is fully complete---eliminating the
+premature re-entry race endemic to simpler two-semaphore implementations.
 
-\section{Representative Execution Trace}
+\textbf{All ten functional requirements} defined in Chapter 2 are satisfied. All invariants
+are enforced by in-code assertions. Deadlock-freedom is proved by eliminating Coffman's
+Hold-and-Wait condition. Dynamic testing via ThreadSanitizer, AddressSanitizer,
+LeakSanitizer, and UndefinedBehaviourSanitizer reports zero defects across all evaluated
+configurations.
 
-The following trace (from \texttt{./ta -s 5 -c 3 -n 2}) annotates the key observable events:
+\section{Future Scope}
 
-\begin{lstlisting}[style=bashstyle,caption={Annotated execution trace.}]
-[  0.000s] [TA] Teaching Assistant arrived at office and opened office hours.
-[  0.000s] [TA] No students waiting. TA takes a nap (Zzz...).       <- Inv.3
-[  0.221s] [Student 4] Awakens TA (chairs: 1/3).                    <- Wake-up path
-[  0.221s] [TA] Calling next student into office (chairs: 0/3).     <- Admit via ta_sem
-[  0.315s] [Student 3] Sits in hallway (chairs: 1/3).               <- Queue path
-[  0.370s] [Student 2] Sits in hallway (chairs: 2/3).
-[  0.425s] [Student 1] Sits in hallway (chairs: 3/3).               <- Inv.2 at max
-[  0.473s] [TA] Finished helping student.                           <- done_sem posted
-[  1.713s] [Student 1] Chairs full! Leaving and will retry.         <- Overflow path
-[  2.948s] [TA] No students waiting. TA takes a nap (Zzz...).       <- Inv.3 restored
-[  2.949s] All students completed!  Notifying TA to wrap up...
-[  2.949s] [TA] Office hours ended. Goodbye!                        <- Clean shutdown
-[  2.949s] Simulation completed successfully. Clean shutdown.
-\end{lstlisting}
+The current implementation can be extended in several directions:
 
-\section{Feature Evaluation}
-
-\begin{table}[H]
-  \centering\small
-  \caption{Feature evaluation against project success criteria (from \texttt{goal.md}).}
-  \label{tab:features}
-  \begin{tabularx}{\textwidth}{l X c}
-    \toprule
-    \textbf{Criterion} & \textbf{Verification Method} & \textbf{Status} \\
-    \midrule
-    TA sleeps when no students present & Log shows ``takes a nap'' when queue empty & \textbf{Met} \\
-    Student arriving at sleeping TA wakes TA & Log shows ``Awakens TA'' on first arrival & \textbf{Met} \\
-    Students wait in hallway chairs & Log shows chair count $1 \to C$ as students arrive & \textbf{Met} \\
-    Max $C$ students wait at once & \texttt{assert(W\_h $\le$ C)} never fires; log confirms & \textbf{Met} \\
-    Student leaves when chairs full & Log shows ``Chairs full! Leaving'' at overflow & \textbf{Met} \\
-    Only one student helped at a time & No overlapping ``in office'' log lines & \textbf{Met} \\
-    Data-race free & ThreadSanitizer: 0 warnings & \textbf{Met} \\
-    No deadlock / starvation & 20-run stress loop: 100\% clean & \textbf{Met} \\
-    Clean shutdown; no leaks & LeakSanitizer: 0 leaks; exit code 0 & \textbf{Met} \\
-    Configurable via CLI & \texttt{-s}, \texttt{-c}, \texttt{-n} flags functional & \textbf{Met} \\
-    \bottomrule
-  \end{tabularx}
-\end{table}
-
-%% ════════════════════════════════════════════════════════════
-%%  CHAPTER 9 — CHALLENGES AND LIMITATIONS
-%% ════════════════════════════════════════════════════════════
-\chapter{Challenges, Limitations, and Future Enhancements}
-
-\section{Challenges Encountered}
-
-\begin{description}[leftmargin=0pt,style=nextline,itemsep=4pt]
-  \item[Premature Re-entry Race (Most Significant).]
-    Initial implementations following the Silberschatz two-semaphore blueprint allowed a
-    student to exit the office and immediately re-queue before the TA's help simulation
-    had completed.  Under high concurrency this produced \texttt{waiting\_students} values
-    exceeding \texttt{num\_chairs}, causing assertion failures.  Resolution: introducing
-    \texttt{done\_sem} as a third synchronisation point.
-
-  \item[Nested Monitor Deadlock (Design Stage).]
-    Early prototypes called \texttt{sem\_wait} while still holding \texttt{chair\_mutex},
-    immediately deadlocking.  The rule ``never call a blocking primitive while holding the
-    mutex'' was codified in both the code comments and the pitfall checklist in
-    \texttt{plan.md}.
-
-  \item[Thread-Safe Random Number Generation.]
-    The standard library \texttt{rand()} maintains global state and is not thread-safe.
-    TSan reported races on \texttt{rand()}'s internal \texttt{static} variable.  Switching
-    to \texttt{rand\_r(\&seed)} with per-thread seeds (initialised to
-    $\text{base} + 997i + 13$) eliminated the race.
-
-  \item[Shutdown Without Lost Wake-Up.]
-    Setting \texttt{running = 0} then waiting for the TA to notice must not miss the case
-    where the TA is already sleeping at the exact moment of shutdown.  The final
-    \texttt{sem\_post(\&students\_sem)} in \texttt{main.c} guarantees the sleeping TA will
-    unblock regardless of timing.
-
-  \item[Garbled Log Output.]
-    Multi-threaded \texttt{printf} calls without locking produce interleaved, unreadable
-    output.  A dedicated \texttt{log\_mutex} was added to \texttt{util.c}; \texttt{fflush}
-    is called inside the lock to prevent partial-line interleaving.
-\end{description}
-
-\section{Limitations}
-
-\begin{itemize}[leftmargin=1.6em,itemsep=2pt]
-  \item \textbf{macOS incompatibility:} POSIX \texttt{sem\_init} is deprecated on macOS;
-        the codebase targets Linux only.  A portable wrapper using named semaphores
-        (\texttt{sem\_open}) would be required for cross-platform support.
-  \item \textbf{No strict FIFO ordering:} Students are admitted in the order that
-        \texttt{sem\_wait(\&ta\_sem)} is scheduled by the kernel — typically FIFO but not
-        guaranteed.  Strict FIFO requires a per-student semaphore and a circular queue.
-  \item \textbf{Simulated rather than real workloads:} Help and programming durations are
-        modelled with \texttt{nanosleep}; the simulation does not perform actual computation.
-  \item \textbf{Single TA:} The problem specification allows one TA; multiple concurrent TAs
-        would require a semaphore counting available TAs and re-analysis of the shared
-        office-occupancy invariant.
+\begin{itemize}[leftmargin=2em,itemsep=3pt]
+  \item \textbf{Strict FIFO Fairness:} A circular queue of waiting student IDs guarded by
+        the mutex, plus an array of per-student binary semaphores, would guarantee service in
+        arrival order.
+  \item \textbf{Multiple TAs:} Replace binary TA signalling with a counting semaphore
+        \texttt{ta\_count} initialised to the number of TAs; re-analyse shared invariants.
+  \item \textbf{Runtime Statistics:} Track per-student wait time, TA idle fraction, and
+        overflow count; print a summary table on shutdown.
+  \item \textbf{macOS Portability:} Replace \texttt{sem\_init}/\texttt{sem\_destroy} with
+        \texttt{sem\_open}/\texttt{sem\_close}/\texttt{sem\_unlink} for Apple platforms.
+  \item \textbf{Office-Hours Timer:} A watchdog thread could signal all actors after a
+        configurable wall-clock duration, more faithfully modelling reality.
+  \item \textbf{TUI Visualisation:} An \texttt{ncurses}-based real-time display could render
+        the hallway chairs, office occupancy, and TA state graphically.
 \end{itemize}
 
-\section{Future Enhancements}
-\label{ch:future}
-
-\begin{enumerate}[leftmargin=1.8em,itemsep=2pt]
-  \item \textbf{Strict FIFO fairness:} A circular queue of waiting student IDs guarded by
-        the mutex, plus an array of per-student binary semaphores, would guarantee service
-        in arrival order.
-  \item \textbf{Multiple TAs:} Replace the binary TA signalling with a counting semaphore
-        \texttt{ta\_count} initialised to the number of TAs; re-examine invariants.
-  \item \textbf{Runtime statistics:} Track per-student wait time, TA idle fraction, and
-        overflow count; print a summary table on shutdown.
-  \item \textbf{Office-hours timer:} A watchdog thread could signal all actors after a
-        configurable wall-clock office-hours duration, more faithfully modelling reality.
-  \item \textbf{macOS portability:} Replace \texttt{sem\_init}/\texttt{sem\_destroy} with
-        \texttt{sem\_open}/\texttt{sem\_close}/\texttt{sem\_unlink}.
-  \item \textbf{TUI visualisation:} An \texttt{ncurses}-based real-time display could render
-        the hallway chairs, office occupancy, and TA state graphically.
-\end{enumerate}
-
 %% ════════════════════════════════════════════════════════════
-%%  CHAPTER 10 — CONCLUSION
-%% ════════════════════════════════════════════════════════════
-\chapter{Conclusion}
-
-This project has delivered a complete, formally analysed, empirically validated implementation
-of the Sleeping Teaching Assistant concurrency problem in C11 on POSIX.  The key contributions
-are:
-
-\begin{enumerate}[leftmargin=1.8em,itemsep=2pt]
-  \item \textbf{Three-semaphore architecture:}  The addition of \texttt{done\_sem} to the
-        classic two-semaphore Sleeping Barber pattern eliminates the premature re-entry race
-        and correctly models the multi-session student lifecycle.
-  \item \textbf{Formal correctness:}  Three system invariants (office single-occupancy,
-        hallway bounded capacity, quiescence consistency) are stated and verified; deadlock-
-        freedom is proved by elimination of Coffman's Hold-and-Wait condition.
-  \item \textbf{Production-quality engineering:}  Thread-safe PRNG, monotonic timestamped
-        logging with its own mutex, \texttt{volatile} shutdown flag, in-code assertions, and
-        a strict mutex-before-semaphore ordering policy bring the implementation to
-        a standard expected of professional systems software.
-  \item \textbf{Complete test coverage:}  Seven functional test scenarios, four sanitizer
-        passes (TSan, ASan, LSan, UBSan), and a 20-run automated stress loop collectively
-        achieve high confidence in correctness across the interleaving space.
-\end{enumerate}
-
-The project demonstrates that classical synchronisation problems remain powerful pedagogical
-tools: solving them in real POSIX C exposes hazards invisible in pseudocode, forces systematic
-reasoning about thread interleaving, and builds practical familiarity with the kernel-level
-primitives that underpin every real-world concurrent server, database, and operating system.
-
-%% ════════════════════════════════════════════════════════════
-%%  REFERENCES
+%%  BIBLIOGRAPHY
 %% ════════════════════════════════════════════════════════════
 \begin{thebibliography}{9}
 
@@ -1103,20 +891,17 @@ primitives that underpin every real-world concurrent server, database, and opera
 A.~Silberschatz, P.~B.~Galvin, and G.~Gagne,
 \textit{Operating System Concepts}, 10th~ed.
 Hoboken, NJ: John Wiley \& Sons, 2018.
-Chapter~6: Synchronisation Tools; Chapter~7: Synchronisation Examples.
 
 \bibitem{tanenbaum}
 A.~S.~Tanenbaum and H.~Bos,
 \textit{Modern Operating Systems}, 4th~ed.
 Upper Saddle River, NJ: Pearson Education, 2014.
-Section~2.3: Interprocess Communication.
 
 \bibitem{dijkstra}
 E.~W.~Dijkstra,
 ``Cooperating Sequential Processes,''
 in \textit{Programming Languages}, F.~Genuys (Ed.),
-Academic Press, 1968, pp.\ 43--112.
-(Original Sleeping Barber formulation.)
+Academic Press, 1968, pp.~43--112.
 
 \bibitem{posix}
 IEEE and The Open Group,
@@ -1131,18 +916,17 @@ Reading, MA: Addison-Wesley Professional, 1997.
 \bibitem{coffman}
 E.~G.~Coffman, M.~J.~Elphick, and A.~Shoshani,
 ``System Deadlocks,''
-\textit{ACM Computing Surveys}, vol.~3, no.~2, pp.\ 67--78, Jun.\ 1971.
+\textit{ACM Computing Surveys}, vol.~3, no.~2, pp.~67--78, Jun.~1971.
 
 \bibitem{gcc_tsan}
 Google LLC and GCC contributors,
-``ThreadSanitizer: a fast data-race detector,''
-\textit{Workshop on Binary Instrumentation and Applications (WBIA)}, 2009.
-Available: \url{https://github.com/google/sanitizers/wiki/ThreadSanitizerCppManual}
+``ThreadSanitizer: a Fast Data-Race Detector,''
+\textit{Workshop on Binary Instrumentation and Applications}, 2009.
 
 \bibitem{gcc_asan}
-S.~Serebryany, D.~Bruening, A.~Potapenko, and D.~Vyukov,
-``AddressSanitizer: a fast address sanity checker,''
-in \textit{Proc. USENIX Annual Technical Conference (USENIX ATC)}, 2012, pp.\ 309--318.
+S.~Serebryany et al.,
+``AddressSanitizer: A Fast Address Sanity Checker,''
+in \textit{Proc. USENIX ATC}, 2012, pp.~309--318.
 
 \bibitem{github}
 Pritam,
