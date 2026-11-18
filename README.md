@@ -16,7 +16,7 @@ A university computer science department has a teaching assistant (TA) who helps
 
 ---
 
-## ⚡ Quick Start (How to Run)
+## ⚡ Quick Start How to Run
 
 ### 1. Compile the Project
 In the root directory of the project, run:
