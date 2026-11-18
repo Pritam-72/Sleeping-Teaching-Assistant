@@ -1,6 +1,6 @@
 # The Sleeping Teaching Assistant
 
-An operating systems concurrency simulation in C implementing the classic **Sleeping Teaching Assistant** synchronization problem using **POSIX threads (pthreads)**, **mutex locks**, and **semaphores**.
+An operating systems concurrency simulation in C implementing the classic **Sleeping Teaching Assistant** synchronization problem using **POSIX threads (pthreads)**, **mutex locks**, and **semaphore**.
 
 ---
 
